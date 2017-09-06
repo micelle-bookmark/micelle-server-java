@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+	<!-- 
+	<conversionRule conversionWord="ip" converterClass="com.tuya.heipa.common.IpConverter" />
+	-->
+	 
+	<property name="LOGPATH" value="${LOG_PATH:-.}" />
+	<property name="log.moduleName" value="heipa-service" />
+	<property name="applicationName" value="HeipaServiceServer" />
+	<contextName>${applicationName}</contextName>
+	<timestamp key="configParseTime" datePattern="yyyy-MM-dd HH:mm:ss.SSS" />
+
+	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+		<resetJUL>true</resetJUL>
+	</contextListener>
+
+	<jmxConfigurator />
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="com.tuya.heipa.common.log.LoggingPatternLayout">
+			<!-- <pattern>${applicationName}: %d{HH:mm:ss.SSS} %logger{36} -%msg%n</pattern> -->
+			<!-- [时间] [服务器名称 IP:端口号] [日志级别] [线程名/号] [类名.方法名.行号] [请求批次号 toke 用户id] 内容 -->
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [${applicationName} %ip:%port] [%-5level] [%thread] [%logger{36}.%M.%L] -- %msg%n</pattern>
+		</layout>
+	</appender>
+
+    <logger name="com.tuya" additivity="false">  
+        <level value="debug" />  
+        <appender-ref ref="console" />  
+    </logger>
+	
+	
+	 
+	<logger name="org.springframework.web" level="DEBUG" >
+		<appender-ref ref="console" />
+	</logger>
+
+	<root level="debug">
+		<appender-ref ref="console" />
+	</root>
+</configuration>
