@@ -2,6 +2,7 @@ package com.tuya.heipa.domain.mapper.user;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -15,9 +16,9 @@ public interface UserMapper {
 	@Results(id = "default", value = { @Result(property = "userName", column = "user_name") })
 	public UserEntity selectById(Long userId);
 
-	@Insert("insert into user(id, user_name) values(#{user.id}, #{user.userName}")
-	public Long insert(UserEntity user);
+	@Insert("insert into user(id, user_name) values(#{user.id}, #{user.userName})")
+	public Long insert(@Param("user") UserEntity user);
 
 	@Update("update user set user_name=#{user.userName} where id=#{user.id}")
-	public Long update(UserEntity user);
+	public Long update(@Param("user") UserEntity user);
 }

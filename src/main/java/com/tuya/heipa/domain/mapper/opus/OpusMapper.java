@@ -2,6 +2,7 @@ package com.tuya.heipa.domain.mapper.opus;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -17,8 +18,8 @@ public interface OpusMapper {
 	public OpusEntity selectById(Long opusId);
 
 	@Insert("insert into opus(id, opus_name, creative_type) values(#{opus.id}, #{opus.opusName}, #{opus.creativeType})")
-	public Long insert(OpusEntity opus);
+	public Long insert(@Param("opus") OpusEntity opus);
 
 	@Update("update opus set opus_name=#{opus.opusName} where id=#{opus.id}")
-	public Long update(OpusEntity opus);
+	public Long update(@Param("opus") OpusEntity opus);
 }

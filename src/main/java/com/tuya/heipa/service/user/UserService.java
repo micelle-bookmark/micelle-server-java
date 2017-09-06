@@ -8,5 +8,12 @@ package com.tuya.heipa.service.user;
  * @version V2.0
  */
 public interface UserService {
-
+	/**
+	 * 保存一个用户实体
+	 * 
+	 * @param id
+	 * @param userName
+	 * @return
+	 */
+	public Long insertUser(Long id, String userName);
 }
