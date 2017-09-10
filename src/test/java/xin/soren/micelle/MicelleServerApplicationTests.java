@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SearchServerApplicationTests {
+public class MicelleServerApplicationTests {
 
 	@Test
 	public void contextLoads() {
