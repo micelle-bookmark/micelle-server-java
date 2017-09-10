@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.tuya</groupId>
-	<artifactId>heipa</artifactId>
+	<groupId>xin.soren</groupId>
+	<artifactId>micelle</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>SearchServer</name>
+	<name>MicelleServer</name>
 	<description>HeiPa App SpringBoot Server.</description>
 
 	<parent>
