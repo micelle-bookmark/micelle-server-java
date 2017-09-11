@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.domain.mapper.user.UserMapper;
-import xin.soren.micelle.domain.model.user.UserEntity;
 
 /**
  * @Description: 用户实现类
@@ -21,8 +20,9 @@ public class DefaultUserService implements UserService {
 
 	@Override
 	public Long insertUser(Long id, String userName) {
-		UserEntity userEntity = new UserEntity(id, userName);
-		return mapper.insert(userEntity);
+		// UserEntity userEntity = new UserEntity(id, userName);
+		// return mapper.insert(userEntity);
+		return 1L;
 	}
 
 }
