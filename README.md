@@ -1,1 +1,2 @@
-# 搜索服务
+# micelle-server-java
+micelle extension server project for java.
