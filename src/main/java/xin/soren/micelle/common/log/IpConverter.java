@@ -8,6 +8,7 @@ import java.text.MessageFormat;
 import java.util.Enumeration;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Component;
 
 import ch.qos.logback.classic.pattern.ClassicConverter;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -20,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
  * @version V2.0
  */
 @Slf4j
+@Component
 public class IpConverter extends ClassicConverter {
 
 	/**

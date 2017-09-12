@@ -1,11 +1,12 @@
 package xin.soren.micelle.domain.model.bookmark;
 
+import java.util.Date;
+
 import lombok.Data;
 
 /**
  * 
- * @ClassName: BookmarkEntity
- * @Description: TODO
+ * @Description: 书签记录实体
  * @author Comsys-soren
  * @date 2017年9月12日 上午11:30:26
  * 
@@ -15,4 +16,13 @@ import lombok.Data;
 @Data
 public class BookmarkEntity {
 	public Long id;
+	public Long userId;
+	public String name;
+	public String url;
+	public Long parentId;
+	public Long depth;
+	public Long isDelete;
+	public String category;
+	public Date createTime;
+	public Date modifyTime;
 }
