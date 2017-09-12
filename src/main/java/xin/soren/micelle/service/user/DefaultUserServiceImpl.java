@@ -7,14 +7,16 @@ import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.domain.mapper.user.UserMapper;
 
 /**
- * @Description: 用户实现类
- * @author yangsonglin
- * @date 2017年9月6日 上午10:54:09
- * @version V2.0
+ * 
+ * @ClassName: DefaultUserServiceImpl
+ * @Description: 用户服务实现类
+ * @author soren
+ * @date 2017年9月12日 上午11:37:58
+ *
  */
 @Component
 @Slf4j
-public class DefaultUserService implements UserService {
+public class DefaultUserServiceImpl implements UserService {
 	@Autowired
 	public UserMapper mapper;
 

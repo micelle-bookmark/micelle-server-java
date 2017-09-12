@@ -6,6 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 
+ * @ClassName: UserEntity
+ * @Description: 用户实体
+ * @author soren
+ * @date 2017年9月12日 上午11:38:34
+ *
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
