@@ -2,7 +2,6 @@ package xin.soren.micelle.service.user;
 
 /**
  * 
- * @ClassName: UserService
  * @Description: 用户服务接口类
  * @author soren
  * @date 2017年9月12日 上午11:38:14

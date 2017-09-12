@@ -4,12 +4,14 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.text.MessageFormat;
 import java.util.Enumeration;
 
 import org.apache.commons.lang.StringUtils;
 
 import ch.qos.logback.classic.pattern.ClassicConverter;
 import ch.qos.logback.classic.spi.ILoggingEvent;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @Description: 日志中的 ip 关键字
@@ -17,7 +19,8 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
  * @date 2017年8月31日 上午11:01:16
  * @version V2.0
  */
-public class LoggingIpConverter extends ClassicConverter {
+@Slf4j
+public class IpConverter extends ClassicConverter {
 
 	/**
 	 * 服务器ip
@@ -28,6 +31,7 @@ public class LoggingIpConverter extends ClassicConverter {
 	public String convert(ILoggingEvent arg0) {
 		if (StringUtils.isBlank(serverIp)) {
 			serverIp = getMyIp2();
+			log.info(MessageFormat.format("获取到 server.ip={0}", serverIp));
 		}
 		return serverIp;
 	}

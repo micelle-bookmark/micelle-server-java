@@ -4,7 +4,7 @@ import ch.qos.logback.classic.PatternLayout;
 
 public class LoggingPatternLayout extends PatternLayout {
 	static {
-		defaultConverterMap.put("ip", LoggingIpConverter.class.getName());
-		defaultConverterMap.put("port", LoggingPortConverter.class.getName());
+		defaultConverterMap.put("ip", IpConverter.class.getName());
+		defaultConverterMap.put("port", PortConverter.class.getName());
 	}
 }

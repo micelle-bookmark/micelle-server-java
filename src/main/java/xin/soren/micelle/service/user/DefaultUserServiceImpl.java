@@ -8,7 +8,6 @@ import xin.soren.micelle.domain.mapper.user.UserMapper;
 
 /**
  * 
- * @ClassName: DefaultUserServiceImpl
  * @Description: 用户服务实现类
  * @author soren
  * @date 2017年9月12日 上午11:37:58
