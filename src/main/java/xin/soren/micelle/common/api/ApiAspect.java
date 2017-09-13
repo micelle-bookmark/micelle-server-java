@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class ApiAspect {
-	@Pointcut("@annotation(xin.soren.micelle.common.api.Api")
+	@Pointcut("@annotation(xin.soren.micelle.common.api.Api)")
 	public void annotationPointCut() {
 	}
 
