@@ -5,6 +5,13 @@ import java.text.MessageFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * 
+ * @Description: 异常基类
+ * @author soren
+ * @date 2017年9月13日 下午8:49:55
+ *
+ */
 @Data
 @AllArgsConstructor
 public class ExceptionBase extends RuntimeException {
@@ -13,8 +20,8 @@ public class ExceptionBase extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String errorMsg = "未知错误";
 	private long errorCode = ExceptionCodeConst.UNKNOWN_ERROR;
+	private String errorMsg = "未知错误";
 
 	@Override
 	public String toString() {
