@@ -1,10 +1,9 @@
 package xin.soren.micelle.common;
 
-import java.text.MessageFormat;
-
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -29,7 +28,7 @@ public class ExceptionHandlerAdvice {
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
 	public Object handleUnknownException(Exception exception) {
-		log.error(MessageFormat.format("[未知错误] {0}", ExceptionUtils.getStackTrace(exception)));
+		log.error("未知错误, {}", ExceptionUtils.getStackTrace(exception));
 
 		return new ApiResponseError(ExceptionCodeConst.UNKNOWN_ERROR, "未知错误");
 	}
@@ -38,9 +37,18 @@ public class ExceptionHandlerAdvice {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public Object handleExceptionBase(ExceptionBase exceptionBase) {
-		log.error(MessageFormat.format("{0}", ExceptionUtils.getStackTrace(exceptionBase)));
+		log.error("内部错误, {0}", ExceptionUtils.getStackTrace(exceptionBase));
 
 		return new ApiResponseError(exceptionBase.getErrorCode(), exceptionBase.getErrorMsg());
+	}
+
+	@ExceptionHandler(value = MissingServletRequestParameterException.class)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public Object handleMissingParameterException(MissingServletRequestParameterException exception) {
+		log.error("缺少参数错误, {0}", ExceptionUtils.getStackTrace(exception));
+
+		return new ApiResponseError(ExceptionCodeConst.C_ARGS_REQUIRED, exception.getMessage());
 	}
 
 	// @ExceptionHandler(value = ForbiddenException.class)

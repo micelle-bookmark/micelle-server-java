@@ -12,4 +12,10 @@ public class ExceptionCodeConst {
 	 * 未知错误
 	 */
 	public static final Long UNKNOWN_ERROR = 999999L;
+
+	/**
+	 * 参数错误, 以 10 开头的6位数数字
+	 */
+	// 缺少参数
+	public static final Long C_ARGS_REQUIRED = 100001L;
 }
