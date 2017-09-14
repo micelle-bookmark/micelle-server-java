@@ -18,4 +18,6 @@ public class ExceptionCodeConst {
 	 */
 	// 缺少参数
 	public static final Long C_ARGS_REQUIRED = 100001L;
+	// 参数错误
+	public static final Long C_API_ARGS_ERROR = 100002L;
 }
