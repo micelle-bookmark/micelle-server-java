@@ -1,7 +1,5 @@
 package xin.soren.micelle.common.log;
 
-import java.text.MessageFormat;
-
 import org.springframework.boot.context.embedded.EmbeddedServletContainerInitializedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -38,7 +36,7 @@ public class PortConverter extends ClassicConverter
 	@Override
 	public void onApplicationEvent(EmbeddedServletContainerInitializedEvent event) {
 		PortConverter.port = String.valueOf(event.getEmbeddedServletContainer().getPort());
-		log.info(MessageFormat.format("获取到 server.port={0}", PortConverter.port));
+		log.info("获取到 server.port={}", PortConverter.port);
 	}
 
 }

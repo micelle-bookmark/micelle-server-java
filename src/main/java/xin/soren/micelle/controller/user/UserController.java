@@ -1,7 +1,5 @@
 package xin.soren.micelle.controller.user;
 
-import java.text.MessageFormat;
-
 import javax.validation.Valid;
 
 import org.springframework.validation.Errors;
@@ -20,10 +18,10 @@ public class UserController {
 	@RequestMapping(value = "/api/test", method = RequestMethod.POST)
 	public Object test(@Valid @RequestBody LoginParam param, Errors errors) {
 		if (errors.hasErrors()) {
-			log.error(MessageFormat.format("错误: {0}", errors.getFieldError().getDefaultMessage()));
+			log.error("错误: {0}", errors.getFieldError().getDefaultMessage());
 		}
 
-		log.info(MessageFormat.format("参数: {0}", param.toString()));
+		log.info("参数: {0}", param.toString());
 		return null;
 	}
 

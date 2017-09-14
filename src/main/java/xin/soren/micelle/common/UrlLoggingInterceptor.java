@@ -1,7 +1,5 @@
 package xin.soren.micelle.common;
 
-import java.text.MessageFormat;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +15,7 @@ public class UrlLoggingInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		log.info(MessageFormat.format("访问 URL: {0}", request.getRequestURL().toString()));
+		log.info("访问 URL: {}", request.getRequestURL().toString());
 
 		// this.addmdc(request);
 		return true;

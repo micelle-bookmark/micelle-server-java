@@ -31,6 +31,7 @@ public class InitDataListener implements InitializingBean, ServletContextAware {
 	 */
 	@Override
 	public void setServletContext(ServletContext arg0) {
+		log.debug("setServletContext");
 	}
 
 }

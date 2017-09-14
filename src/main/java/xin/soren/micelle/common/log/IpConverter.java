@@ -4,7 +4,6 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.text.MessageFormat;
 import java.util.Enumeration;
 
 import org.apache.commons.lang.StringUtils;
@@ -33,7 +32,7 @@ public class IpConverter extends ClassicConverter {
 	public String convert(ILoggingEvent arg0) {
 		if (StringUtils.isBlank(serverIp)) {
 			serverIp = getMyIp2();
-			log.info(MessageFormat.format("获取到 server.ip={0}", serverIp));
+			log.info("获取到 server.ip={}", serverIp);
 		}
 		return serverIp;
 	}
