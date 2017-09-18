@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -19,6 +20,11 @@ public interface UserMapper {
 			@Result(property = "createTime", column = "create_time"),
 			@Result(property = "modifyTime", column = "modify_time") })
 	public UserEntity getByUserId(Long userId);
+
+	@Select("select id, user_name, avatar, email, password, salt, create_time, modify_time "
+			+ "from user where user_name=#{userName}")
+	@ResultMap("default")
+	public UserEntity getByUserName(@Param("userName") String userName);
 
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	@Insert("insert into user(id, user_name, avatar, email, password, salt) "
