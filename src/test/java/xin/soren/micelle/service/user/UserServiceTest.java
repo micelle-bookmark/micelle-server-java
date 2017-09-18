@@ -13,6 +13,9 @@ import xin.soren.micelle.domain.mapper.user.UserMapper;
 import xin.soren.micelle.domain.model.user.UserEntity;
 
 @RunWith(SpringRunner.class)
+// @SpringBootTest(classes = { DataSourceAutoConfiguration.class,
+// UserService.class, UserMapper.class })
+// @MapperScan("xin.soren.micelle.domain.mapper.user")
 @SpringBootTest
 @Slf4j
 @ActiveProfiles("test")
@@ -32,7 +35,7 @@ public class UserServiceTest {
 
 	@Test
 	public void selectUser() {
-		UserEntity userEntity = mapper.selectById(1L);
+		UserEntity userEntity = mapper.getByUserId(1L);
 		log.info(userEntity.toString());
 		Assert.assertNotNull(userEntity);
 	}

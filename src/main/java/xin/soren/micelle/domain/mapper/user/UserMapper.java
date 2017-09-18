@@ -2,6 +2,7 @@ package xin.soren.micelle.domain.mapper.user;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -17,8 +18,9 @@ public interface UserMapper {
 	@Results(id = "default", value = { @Result(property = "userName", column = "user_name"),
 			@Result(property = "createTime", column = "create_time"),
 			@Result(property = "modifyTime", column = "modify_time") })
-	public UserEntity selectById(Long userId);
+	public UserEntity getByUserId(Long userId);
 
+	@Options(useGeneratedKeys = true, keyProperty = "id")
 	@Insert("insert into user(id, user_name, avatar, email, password, salt) "
 			+ "values(#{user.id}, #{user.userName}, #{user.avatar}, #{user.email}, #{user.password}, #{user.salt})")
 	public Long insert(@Param("user") UserEntity user);
