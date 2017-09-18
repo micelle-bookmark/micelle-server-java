@@ -20,4 +20,7 @@ public class ExceptionCodeConst {
 	public static final Long C_ARGS_REQUIRED = 100001L;
 	// 参数错误
 	public static final Long C_API_ARGS_ERROR = 100002L;
+
+	// 数据库错误
+	public static final Long S_DATABASE_ERROR = 200000L;
 }

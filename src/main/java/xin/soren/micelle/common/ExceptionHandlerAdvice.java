@@ -1,6 +1,7 @@
 package xin.soren.micelle.common;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -37,7 +38,7 @@ public class ExceptionHandlerAdvice {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public Object handleExceptionBase(ExceptionBase exceptionBase) {
-		log.error("内部错误, {0}", ExceptionUtils.getStackTrace(exceptionBase));
+		log.error("内部错误, {}", ExceptionUtils.getStackTrace(exceptionBase));
 
 		return new ApiResponseError(exceptionBase.getErrorCode(), exceptionBase.getErrorMsg());
 	}
@@ -46,7 +47,7 @@ public class ExceptionHandlerAdvice {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public Object handleMissingParameterException(MissingServletRequestParameterException exception) {
-		log.error("缺少参数错误, {0}", ExceptionUtils.getStackTrace(exception));
+		log.error("缺少参数错误, {}", ExceptionUtils.getStackTrace(exception));
 
 		return new ApiResponseError(ExceptionCodeConst.C_ARGS_REQUIRED, exception.getMessage());
 	}
@@ -63,13 +64,12 @@ public class ExceptionHandlerAdvice {
 	// exceptionBase.getErrorMsg());
 	// }
 	//
-	// @ExceptionHandler(value = DataAccessException.class)
-	// @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	// @ResponseBody
-	// public Object handleExcetptionBase(DataAccessException exception) {
-	// log.error(MessageFormat.format("[数据库错误] {0}",
-	// ExceptionUtils.getStackTrace(exception)));
-	//
-	// return new ApiErrorResponse(ExceptionCodeConst.S_200102, "数据库错误");
-	// }
+	@ExceptionHandler(value = DataAccessException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseBody
+	public Object handleExcetptionBase(DataAccessException exception) {
+		log.error("数据库错误 {}", ExceptionUtils.getStackTrace(exception));
+
+		return new ApiResponseError(ExceptionCodeConst.S_DATABASE_ERROR, "数据库错误");
+	}
 }
