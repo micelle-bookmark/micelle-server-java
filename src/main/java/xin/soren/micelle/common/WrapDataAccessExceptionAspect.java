@@ -26,16 +26,6 @@ public class WrapDataAccessExceptionAspect {
 	public void annotationPointCut() {
 	}
 
-	// @Around("annotationPointCut()")
-	// public Object around(ProceedingJoinPoint pjp) throws Throwable {
-	// try {
-	// return pjp.proceed();
-	// } catch (DataAccessException e) {
-	// log.error("数据访问错误, {}", ExceptionUtils.getStackTrace(e));
-	// throw new DatabaseException("数据库错误");
-	// }
-	// }
-
 	@AfterThrowing(pointcut = "annotationPointCut()", throwing = "ex")
 	public void doDataAccessException(DataAccessException ex) {
 		log.error("数据访问错误, {}", ExceptionUtils.getStackTrace(ex));
