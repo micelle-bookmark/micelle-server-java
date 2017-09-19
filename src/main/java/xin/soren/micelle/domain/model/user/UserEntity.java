@@ -18,11 +18,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserEntity {
 	private Long id;
+	private Long accountId;
 	private String userName;
 	private String avatar;
 	private String email;
-	private String password;
-	private String salt;
 	private Date createTime;
 	private Date modifyTime;
 }

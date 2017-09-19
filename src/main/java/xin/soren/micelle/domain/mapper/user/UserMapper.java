@@ -14,26 +14,23 @@ import xin.soren.micelle.domain.model.user.UserEntity;
 
 @Mapper
 public interface UserMapper {
-	@Select("select id, user_name, avatar, email, password, salt, create_time, modify_time "
-			+ "from user where id=#{arg0}")
-	@Results(id = "default", value = { @Result(property = "userName", column = "user_name"),
+	@Select("select id, account_id, user_name, avatar, email, create_time, modify_time " + "from user where id=#{arg0}")
+	@Results(id = "default", value = { @Result(property = "accountId", column = "account_id"),
+			@Result(property = "userName", column = "user_name"),
 			@Result(property = "createTime", column = "create_time"),
 			@Result(property = "modifyTime", column = "modify_time") })
 	public UserEntity getByUserId(Long userId);
 
-	@Select("select id, user_name, avatar, email, password, salt, create_time, modify_time "
+	@Select("select id, account_id, user_name, avatar, email, create_time, modify_time "
 			+ "from user where user_name=#{userName}")
 	@ResultMap("default")
 	public UserEntity getByUserName(@Param("userName") String userName);
 
 	@Options(useGeneratedKeys = true, keyProperty = "id")
-	@Insert("insert into user(id, user_name, avatar, email, password, salt) "
-			+ "values(#{user.id}, #{user.userName}, #{user.avatar}, #{user.email}, #{user.password}, #{user.salt})")
+	@Insert("insert into user(id, account_id, user_name, avatar, email) "
+			+ "values(#{user.id}, #{user.accountId}, #{user.userName}, #{user.avatar}, #{user.email})")
 	public Long insert(@Param("user") UserEntity user);
 
 	@Update("update user set user_name=#{user.userName} where id=#{user.id}")
 	public Long update(@Param("user") UserEntity user);
-
-	@Update("update user set password=#{password}, salt=#{salt} where id=#{id}")
-	public Long updatePassword(@Param("id") Long id, @Param("password") String password, @Param("salt") String salt);
 }
