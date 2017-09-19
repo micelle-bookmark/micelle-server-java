@@ -1,7 +1,7 @@
 package xin.soren.micelle.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.domain.mapper.user.UserMapper;
@@ -13,7 +13,7 @@ import xin.soren.micelle.domain.mapper.user.UserMapper;
  * @date 2017年9月12日 上午11:37:58
  *
  */
-@Component
+@Service
 @Slf4j
 public class DefaultUserServiceImpl implements UserService {
 	@Autowired

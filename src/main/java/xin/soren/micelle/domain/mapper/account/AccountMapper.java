@@ -23,7 +23,7 @@ public interface AccountMapper {
 			+ "values(#{account.id}, #{account.accountName}, #{account.password}, #{account.salt}, #{account.createTime}, #{account.modifyTime})")
 	public Long insert(@Param("account") AccountEntity account);
 
-	@Select("select id, account_name, password, salt, create_time, modify_time from account " + "where id=#{id}")
+	@Select("select * from account " + "where id=#{id}")
 	@Results(id = "default", value = { @Result(property = "accountName", column = "account_name"),
 			@Result(property = "createTime", column = "create_time"),
 			@Result(property = "modifyTime", column = "modify_time") })

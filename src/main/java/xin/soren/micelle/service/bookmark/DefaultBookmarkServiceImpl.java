@@ -1,6 +1,6 @@
 package xin.soren.micelle.service.bookmark;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @date 2017年9月12日 上午11:37:35
  *
  */
-@Component
+@Service
 public class DefaultBookmarkServiceImpl {
 
 }

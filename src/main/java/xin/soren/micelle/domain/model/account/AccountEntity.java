@@ -1,6 +1,6 @@
 package xin.soren.micelle.domain.model.account;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.Data;
 
