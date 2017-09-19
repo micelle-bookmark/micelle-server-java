@@ -52,10 +52,10 @@ public class AccountServiceTest {
 		Long count = mapper.updatePassword(accountEntity);
 	}
 
-	@Test
-	public void testGetAccountById() {
-		log.info("test select account by id");
-
-		AccountEntity accountEntity = mapper.getById(1L);
-	}
+	// @Test
+	// public void testGetAccountById() {
+	// log.info("test select account by id");
+	//
+	// AccountEntity accountEntity = mapper.getById(1L);
+	// }
 }
