@@ -1,5 +1,7 @@
 package xin.soren.micelle.service.account;
 
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,22 @@ public class AccountServiceTest {
 	// Long count = mapper.insert(accountEntity);
 	// Assert.assertEquals(count, (Long) 1L);
 	// }
+
+	@Test
+	public void testUpdate() {
+		log.info("test update account");
+
+		AccountEntity accountEntity = new AccountEntity();
+		accountEntity.setId(1L);
+		accountEntity.setAccountName("accountName");
+		accountEntity.setPassword("password");
+		accountEntity.setSalt("salt");
+		accountEntity.setCreateTime(new Date());
+		accountEntity.setModifyTime(new Date());
+
+		mapper.insert(accountEntity);
+		Long count = mapper.updatePassword(accountEntity);
+	}
 
 	@Test
 	public void testGetAccountById() {
