@@ -4,6 +4,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,7 @@ import xin.soren.micelle.exception.DatabaseException;
  */
 @Component
 @Aspect
+@Order(1)
 @Slf4j
 public class WrapDataAccessExceptionAspect {
 
