@@ -7,6 +7,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.support.collections.DefaultRedisList;
+import org.springframework.data.redis.support.collections.RedisList;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -31,6 +34,12 @@ public class UserServiceTest {
 	@Autowired
 	RedisOperator redisOperator;
 
+	@Autowired
+	RedisTemplate redisTemplate;
+
+	// @Autowired
+	// RedisList<Long> redisList;
+
 	// @Test
 	// public void testInsertUser() {
 	// log.info("-------------------- testInsertUser");
@@ -50,7 +59,11 @@ public class UserServiceTest {
 			}
 		};
 		String key = "redis:list:key";
-		redisOperator.saveList(key, list);
+		// redisOperator.saveList(key, list);
+
+		@SuppressWarnings("unchecked")
+		RedisList<Long> l = new DefaultRedisList<Long>(redisTemplate.boundListOps(key));
+		l.addAll(list);
 	}
 
 	@Test
