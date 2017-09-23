@@ -1,6 +1,8 @@
 package xin.soren.micelle.service.user;
 
-import org.junit.Assert;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.component.redis.RedisOperator;
 import xin.soren.micelle.domain.mapper.user.UserMapper;
-import xin.soren.micelle.domain.model.user.UserEntity;
 
 @RunWith(SpringRunner.class)
 // @SpringBootTest(classes = { DataSourceAutoConfiguration.class,
@@ -26,6 +28,9 @@ public class UserServiceTest {
 	@Autowired
 	UserMapper mapper;
 
+	@Autowired
+	RedisOperator redisOperator;
+
 	// @Test
 	// public void testInsertUser() {
 	// log.info("-------------------- testInsertUser");
@@ -35,9 +40,17 @@ public class UserServiceTest {
 
 	@Test
 	public void selectUser() {
-		UserEntity userEntity = mapper.getByUserId(1L);
-		log.info(userEntity.toString());
-		Assert.assertNotNull(userEntity);
+		// UserEntity userEntity = mapper.getByUserId(1L);
+		// log.info(userEntity.toString());
+		// Assert.assertNotNull(userEntity);
+		List<Long> list = new ArrayList<Long>() {
+			{
+				add(1L);
+				add(2L);
+			}
+		};
+		String key = "redis:list:key";
+		redisOperator.saveList(key, list);
 	}
 
 	@Test
