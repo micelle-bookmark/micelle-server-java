@@ -23,6 +23,16 @@ public interface AccountMapper {
 			+ "values(#{account.id}, #{account.accountName}, #{account.password}, #{account.salt}, #{account.createTime}, #{account.modifyTime})")
 	public Long insert(@Param("account") AccountEntity account);
 
+	@Insert({ "<script>" + "INSERT INTO account" + "<trim prefix='(' suffix=')' suffixOverrides=',' >" + "id, "
+			+ "<if test='#{c.accountName} != null'> account_name, </if>" + "password, salt, "
+			+ "<if test='#{c.createTime} != null'> create_time, </if>"
+			+ "<if test='#{c.modifyTime} != null'> modify_time, </if>" + "</trim>" + " VALUES"
+			+ "<trim prefix='(' suffix=')' suffixOverrides=',' >" + "#{c.id}, "
+			+ "<if test='#{c.accountName} != null'> #{c.accountName}, </if>" + "#{c.password}, #{c.salt}, "
+			+ "<if test='#{c.createTime} != null'> #{c.createTime}, </if>"
+			+ "<if test='#{c.modifyTime} != null'> #{c.modifyTime}, </if>" + "</trim>" + "</script>" })
+	public Long insertSelective(@Param("c") AccountEntity account);
+
 	@Select("select * from account " + "where id=#{id}")
 	@Results(id = "default", value = { @Result(property = "accountName", column = "account_name"),
 			@Result(property = "createTime", column = "create_time"),

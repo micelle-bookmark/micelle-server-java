@@ -37,17 +37,17 @@ public class ModifyTimeTrigger extends TriggerAdapter {
 		log.info("row count {}", arg2.getRow());
 
 		int count = 0;
-		while (arg1.next()) {
-			// for (int index = 1; index <= columnCount; ++index) {
-			// log.info("column name={}, value={}",
-			// metaData.getColumnName(index), arg2.getString(index));
-			// }
-			++count;
-
-			if ((count % 100) == 0) {
-				log.info("count {}", count);
-			}
-		}
+		// while (arg1.next()) {
+		// // for (int index = 1; index <= columnCount; ++index) {
+		// // log.info("column name={}, value={}",
+		// // metaData.getColumnName(index), arg2.getString(index));
+		// // }
+		// ++count;
+		//
+		// if ((count % 100) == 0) {
+		// log.info("count {}", count);
+		// }
+		// }
 
 		log.info("count {}", count);
 	}
