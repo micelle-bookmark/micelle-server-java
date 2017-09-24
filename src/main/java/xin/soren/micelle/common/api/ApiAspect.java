@@ -1,6 +1,7 @@
 package xin.soren.micelle.common.api;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.common.CommonUtils;
 import xin.soren.micelle.common.Define;
 import xin.soren.micelle.exception.ExceptionCodeConst;
 import xin.soren.micelle.exception.ServiceException;
@@ -42,7 +44,30 @@ public class ApiAspect {
 	public Object around(ProceedingJoinPoint pjp) throws Throwable {
 		checkValidationError(pjp);
 
-		return pjp.proceed();
+		// 调用函数
+		Object obj = pjp.proceed();
+
+		// 如果需要构造 key
+		String key = "";
+		Api api = CommonUtils.getAspect(pjp, Api.class);
+		if (api != null) {
+			key = api.value();
+		}
+
+		if (StringUtils.isNotBlank(key)) {
+			obj = doWrapReturnObject(key, obj);
+		}
+
+		return new ApiResponseSuccess(obj);
+	}
+
+	@SuppressWarnings("serial")
+	private Object doWrapReturnObject(String key, Object value) {
+		return new HashMap<String, Object>() {
+			{
+				put(key, value);
+			}
+		};
 	}
 
 	/**
