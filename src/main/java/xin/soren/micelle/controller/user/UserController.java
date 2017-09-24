@@ -23,11 +23,17 @@ import xin.soren.micelle.controller.user.param.TestParam;
 @Slf4j
 public class UserController {
 
-	@RequestMapping(value = "/api/", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/user", method = RequestMethod.POST)
 	@Api
-	public Object apiLogin(@Valid @RequestBody TestParam param, Errors errors) {
+	public Object getUserInfo(@Valid @RequestBody TestParam param, Errors errors) {
 		log.info("登录请求, 参数: {}", param);
 
+		return null;
+	}
+
+	@RequestMapping(value = "/api/user", method = RequestMethod.PATCH)
+	@Api
+	public Object modifyUserInfo() {
 		return null;
 	}
 }
