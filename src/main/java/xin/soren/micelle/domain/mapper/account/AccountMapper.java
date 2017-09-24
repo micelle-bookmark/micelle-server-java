@@ -20,7 +20,8 @@ import xin.soren.micelle.domain.model.account.AccountEntity;
 @Mapper
 public interface AccountMapper {
 	@Insert("insert into account(id, account_name, password, salt, create_time, modify_time) "
-			+ "values(#{account.id}, #{account.accountName}, #{account.password}, #{account.salt}, #{account.createTime}, #{account.modifyTime})")
+			+ "values(#{account.id}, #{account.accountName}, #{account.password}, #{account.salt}, "
+			+ "#{account.createTime}, #{account.modifyTime})")
 	public Long insert(@Param("account") AccountEntity account);
 
 	@Insert({ "<script>" + "INSERT INTO account" + "<trim prefix='(' suffix=')' suffixOverrides=',' >" + "id, "
@@ -39,6 +40,6 @@ public interface AccountMapper {
 			@Result(property = "modifyTime", column = "modify_time") })
 	public AccountEntity getById(@Param("id") Long id);
 
-	@Update("update account set account_name=#{account.accountName}, password=#{account.password}, salt=#{account.salt} where id=#{account.id}")
-	public Long updatePassword(@Param("account") AccountEntity account);
+	@Update("update account set password=#{password}, " + "salt=#{salt} where id=#{id}")
+	public Long updatePassword(@Param("id") Long id, @Param("password") String password, @Param("salt") String salt);
 }
