@@ -30,11 +30,12 @@ public class WrapDataAccessExceptionAspect {
 	public void annotationPointCut() {
 	}
 
-	@AfterThrowing(pointcut = "annotationPointCut()", throwing = "ex")
-	public void doDataAccessException(DataAccessException ex, JoinPoint jp) {
+	@AfterThrowing(value = "annotationPointCut()", throwing = "ex")
+	public void doDataAccessException(JoinPoint jp, DataAccessException ex) {
+
+		String value = "";
 
 		WrapDataAccessException annotation = CommonUtils.getAspect(jp, WrapDataAccessException.class);
-		String value = "";
 		if (annotation != null) {
 			value = annotation.value();
 		}

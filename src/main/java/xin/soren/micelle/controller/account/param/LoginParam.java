@@ -1,4 +1,4 @@
-package xin.soren.micelle.controller.user.param;
+package xin.soren.micelle.controller.account.param;
 
 import javax.validation.constraints.NotNull;
 
