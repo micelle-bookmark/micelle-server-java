@@ -63,7 +63,7 @@ public class UserServiceTest {
 
 		@SuppressWarnings("unchecked")
 		RedisList<Long> l = new DefaultRedisList<Long>(redisTemplate.boundListOps(key));
-		l.addAll(list);
+		// l.addAll(list);
 	}
 
 	@Test

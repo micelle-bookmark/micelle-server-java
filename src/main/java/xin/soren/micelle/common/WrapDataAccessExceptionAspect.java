@@ -1,6 +1,8 @@
 package xin.soren.micelle.common;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -29,8 +31,20 @@ public class WrapDataAccessExceptionAspect {
 	}
 
 	@AfterThrowing(pointcut = "annotationPointCut()", throwing = "ex")
-	public void doDataAccessException(DataAccessException ex) {
-		log.error("数据访问错误, {}", ExceptionUtils.getStackTrace(ex));
+	public void doDataAccessException(DataAccessException ex, JoinPoint jp) {
+
+		WrapDataAccessException annotation = CommonUtils.getAspect(jp, WrapDataAccessException.class);
+		String value = "";
+		if (annotation != null) {
+			value = annotation.value();
+		}
+
+		if (StringUtils.isBlank(value)) {
+			log.error("数据访问错误, {}", ExceptionUtils.getStackTrace(ex));
+		} else {
+			log.error("{}, 数据访问错误, {}", value, ExceptionUtils.getStackTrace(ex));
+		}
+
 		throw new DatabaseException("数据库错误");
 	}
 }
