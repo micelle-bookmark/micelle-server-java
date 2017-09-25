@@ -20,9 +20,9 @@ public class DefaultUserServiceImpl implements UserService {
 	public UserMapper mapper;
 
 	@Override
-	public Long insertUser(Long id, String userName) {
-		// UserEntity userEntity = new UserEntity(id, userName);
-		// return mapper.insert(userEntity);
+	public Long createUser(Long id, String userName) {
+		log.info("创建用户, id={}, userName={}", id, userName);
+
 		return 1L;
 	}
 

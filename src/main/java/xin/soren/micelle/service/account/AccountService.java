@@ -1,5 +1,7 @@
 package xin.soren.micelle.service.account;
 
+import xin.soren.micelle.domain.model.account.AccountEntity;
+
 /**
  * 
  * @Description: 帐号服务接口类
@@ -8,5 +10,7 @@ package xin.soren.micelle.service.account;
  *
  */
 public interface AccountService {
+	public Long createAccount(String accountName, String password, String salt);
 
+	public AccountEntity getAccountById(Long id);
 }

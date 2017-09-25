@@ -2,6 +2,8 @@ package xin.soren.micelle.service.account;
 
 import org.springframework.stereotype.Service;
 
+import xin.soren.micelle.domain.model.account.AccountEntity;
+
 /**
  * 
  * @Description: 帐号服务实现类
@@ -11,5 +13,17 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DefaultAccountServiceImpl implements AccountService {
+
+	@Override
+	public Long createAccount(String accountName, String password, String salt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AccountEntity getAccountById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

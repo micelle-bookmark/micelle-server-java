@@ -15,5 +15,5 @@ public interface UserService {
 	 * @param userName
 	 * @return
 	 */
-	public Long insertUser(Long id, String userName);
+	public Long createUser(Long id, String userName);
 }
