@@ -48,8 +48,8 @@ public class AccountServiceTest {
 
 		mapper.insertSelective(accountEntity);
 		// mapper.insertSelective(accountEntity);
-		Long count = mapper.updatePassword(accountEntity);
-		log.info("update {}", count);
+		// Long count = mapper.updatePassword(accountEntity);
+		// log.info("update {}", count);
 
 		AccountEntity entity = mapper.getById(1L);
 		log.info("account entity: {}", entity);

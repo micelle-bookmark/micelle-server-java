@@ -2,9 +2,11 @@ package xin.soren.micelle.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.domain.mapper.user.UserMapper;
+import xin.soren.micelle.domain.model.user.UserEntity;
 
 /**
  * 
@@ -17,13 +19,24 @@ import xin.soren.micelle.domain.mapper.user.UserMapper;
 @Slf4j
 public class DefaultUserServiceImpl implements UserService {
 	@Autowired
-	public UserMapper mapper;
+	UserMapper userMapper;
 
 	@Override
+	@Transactional
 	public Long createUser(Long id, String userName) {
 		log.info("创建用户, id={}, userName={}", id, userName);
 
-		return 1L;
+		return id;
+	}
+
+	@Override
+	public UserEntity getUserById(Long id) {
+		return userMapper.getByUserId(id);
+	}
+
+	@Override
+	public UserEntity getUserByName(String userName) {
+		return userMapper.getByUserName(userName);
 	}
 
 }
