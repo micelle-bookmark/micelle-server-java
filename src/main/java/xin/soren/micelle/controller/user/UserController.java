@@ -23,6 +23,15 @@ import xin.soren.micelle.controller.user.param.TestParam;
 @Slf4j
 public class UserController {
 
+	/**
+	 * 
+	 * @Description: 获取当前登录用户的个人信息
+	 * @param param
+	 * @param errors
+	 * @return
+	 * @Throws
+	 * @Date 2017年9月25日 下午9:20:35
+	 */
 	@RequestMapping(value = "/api/user", method = RequestMethod.POST)
 	@Api
 	public Object getUserInfo(@Valid @RequestBody TestParam param, Errors errors) {
@@ -31,6 +40,13 @@ public class UserController {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @Description: 修改当前登录用户的个人信息
+	 * @return
+	 * @Throws
+	 * @Date 2017年9月25日 下午9:20:54
+	 */
 	@RequestMapping(value = "/api/user", method = RequestMethod.PATCH)
 	@Api
 	public Object modifyUserInfo() {
