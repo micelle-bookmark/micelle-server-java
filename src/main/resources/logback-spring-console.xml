@@ -28,7 +28,7 @@
         <level value="debug" />  
         <appender-ref ref="console" />  
     </logger>
-	
+
 	<logger name="org.springframework.web" level="DEBUG" >
 		<appender-ref ref="console" />
 	</logger>

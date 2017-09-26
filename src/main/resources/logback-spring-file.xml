@@ -55,12 +55,11 @@
 
     <appender name="file.async" class="ch.qos.logback.classic.AsyncAppender">  
         <discardingThreshold>0</discardingThreshold>  
-        <queueSize>1024</queueSize>  
-        <includeCallerData>true</includeCallerData>  
+        <queueSize>4096</queueSize>  
+        <includeCallerData>false</includeCallerData>  
+        <neverBlock>true</neverBlock>
         <appender-ref ref="file" />  
     </appender> 
-    
-    
     
     <logger name="com.tuya" additivity="false">  
         <level value="debug" />  
@@ -68,15 +67,11 @@
         <appender-ref ref="file.async" />  
     </logger>
 	
-	
-	 
 	<logger name="org.springframework.web" level="DEBUG" >
-	<!-- 
 		<appender-ref ref="file.async" />
-	-->
 	</logger>
 
 	<root level="debug">
-		<appender-ref ref="console" />
+		<appender-ref ref="file.async" />
 	</root>
 </configuration>
