@@ -19,21 +19,29 @@
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="xin.soren.micelle.common.log.LoggingPatternLayout">
 			<!-- <pattern>${applicationName}: %d{HH:mm:ss.SSS} %logger{36} -%msg%n</pattern> -->
-			<!-- [时间] [服务器名称 IP:端口号] [日志级别] [线程名/号] [类名.方法名.行号] [请求批次号 toke 用户id] 内容 -->
+			<!-- [时间] [服务器名称 IP:端口号] [日志级别] [线程名/号] [类名.方法名.行号] 内容 -->
 			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [${applicationName} %ip:%port] [%-5level] [%thread] [%logger{36}.%M.%L] -- %msg%n</pattern>
 		</layout>
 	</appender>
 
+    <appender name="console.async" class="ch.qos.logback.classic.AsyncAppender">  
+        <discardingThreshold>0</discardingThreshold>  
+        <queueSize>4096</queueSize>  
+        <includeCallerData>false</includeCallerData>  
+        <neverBlock>true</neverBlock>
+        <appender-ref ref="console" />  
+    </appender> 
+    
     <logger name="com.tuya" additivity="false">  
         <level value="debug" />  
-        <appender-ref ref="console" />  
+        <appender-ref ref="console.async" />  
     </logger>
 
 	<logger name="org.springframework.web" level="DEBUG" >
-		<appender-ref ref="console" />
+		<appender-ref ref="console.async" />
 	</logger>
 
 	<root level="debug">
-		<appender-ref ref="console" />
+		<appender-ref ref="console.async" />
 	</root>
 </configuration>
