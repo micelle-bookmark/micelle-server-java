@@ -3,6 +3,8 @@ package xin.soren.micelle.common;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -17,7 +19,10 @@ public class UrlLoggingInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		log.info("访问 URL: {}", request.getRequestURL().toString());
 
-		// this.addmdc(request);
+		String request_batch_number = request.getParameter("request_batch_number");
+		request_batch_number = StringUtils.isBlank(request_batch_number) ? "" : request_batch_number;
+		MDC.put("rbn", request_batch_number);
+
 		return true;
 	}
 
@@ -29,32 +34,6 @@ public class UrlLoggingInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		// this.clenmdc();
+		MDC.remove("rbn");
 	}
-
-	// /**
-	// * 向MDC中加入请求批次号、token、会员id信息，以便在logback日志打印时输出
-	// *
-	// * @param request
-	// */
-	// private void addmdc(HttpServletRequest request) {
-	// String request_batch_number =
-	// request.getParameter("request_batch_number");
-	// request_batch_number = StringUtils.isBlank(request_batch_number) ? "" :
-	// request_batch_number;
-	// String token = HttpHeaderUtil.getAccessToken();
-	// token = StringUtils.isBlank(token) ? "" : token;
-	// MDC.put("rbn", request_batch_number);
-	// MDC.put("token", token);
-	// MDC.put("memberId", "");
-	// }
-	//
-	// /**
-	// * 清除之前加入的请求批次号、token、会员id信息
-	// */
-	// private void clenmdc() {
-	// MDC.remove("rbn");
-	// MDC.remove("token");
-	// MDC.remove("memberId");
-	// }
 }
