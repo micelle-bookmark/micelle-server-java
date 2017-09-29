@@ -15,14 +15,53 @@ import lombok.Data;
  */
 @Data
 public class BookmarkEntity {
+	/**
+	 * 书签记录 ID, primary key
+	 */
 	public Long id;
+
+	/**
+	 * 书签所属用户 ID
+	 */
 	public Long userId;
+
+	/**
+	 * 书签名称
+	 */
 	public String name;
+
+	/**
+	 * 书签所指 url
+	 */
 	public String url;
+
+	/**
+	 * 父书签目录 ID
+	 */
 	public Long parentId;
+
+	/**
+	 * 深度, 从0开始
+	 */
 	public Long depth;
+
+	/**
+	 * 是否被删除, 0=未删除, 1=删除
+	 */
 	public Long isDelete;
+
+	/**
+	 * 书签分类，dir=书签目录, bookmark=书签
+	 */
 	public String category;
+
+	/**
+	 * 创建时间
+	 */
 	public Date createTime;
+
+	/**
+	 * 上次修改时间
+	 */
 	public Date modifyTime;
 }

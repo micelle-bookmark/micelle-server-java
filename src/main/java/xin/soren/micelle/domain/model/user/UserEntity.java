@@ -17,11 +17,38 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserEntity {
+	/**
+	 * 用户 ID, primary key
+	 */
 	private Long id;
+
+	/**
+	 * 该用户关联的 accountId
+	 */
 	private Long accountId;
+
+	/**
+	 * 用户名
+	 */
 	private String userName;
+
+	/**
+	 * 头像地址
+	 */
 	private String avatar;
+
+	/**
+	 * email
+	 */
 	private String email;
+
+	/**
+	 * 注册时间
+	 */
 	private Date createTime;
+
+	/**
+	 * 上次修改时间
+	 */
 	private Date modifyTime;
 }

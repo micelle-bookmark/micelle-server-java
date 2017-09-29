@@ -13,10 +13,33 @@ import lombok.Data;
  */
 @Data
 public class AccountEntity {
+	/**
+	 * 帐号 ID, primary key
+	 */
 	private Long id;
+
+	/**
+	 * 帐号名称
+	 */
 	private String accountName;
+
+	/**
+	 * 密码, md5(用户密码+salt)
+	 */
 	private String password;
+
+	/**
+	 * 随机盐值
+	 */
 	private String salt;
+
+	/**
+	 * 帐号创建时间
+	 */
 	private Date createTime;
+
+	/**
+	 * 上次修改时间
+	 */
 	private Date modifyTime;
 }

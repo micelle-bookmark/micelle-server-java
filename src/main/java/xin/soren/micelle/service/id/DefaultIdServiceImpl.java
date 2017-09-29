@@ -1,6 +1,6 @@
 package xin.soren.micelle.service.id;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @date 2017年9月24日 下午7:51:01
  *
  */
-@Component
+@Service
 public class DefaultIdServiceImpl implements IdService {
 
 	@Override
