@@ -1,4 +1,4 @@
-package xin.soren.micelle.common;
+package xin.soren.micelle.common.define;
 
 /**
  * 
@@ -30,6 +30,11 @@ public class Define {
 		public int getValue() {
 			return this.value;
 		}
+
+		@Override
+		public String toString() {
+			return String.valueOf(this.value);
+		}
 	}
 
 	static public enum DeleteStatus {
@@ -47,6 +52,11 @@ public class Define {
 		public int getValue() {
 			return this.value;
 		}
+
+		@Override
+		public String toString() {
+			return String.valueOf(this.value);
+		}
 	}
 
 	static public enum BookmarkCategory {
@@ -62,6 +72,11 @@ public class Define {
 		}
 
 		public String getValue() {
+			return this.value;
+		}
+
+		@Override
+		public String toString() {
 			return this.value;
 		}
 	}

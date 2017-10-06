@@ -3,7 +3,7 @@ package xin.soren.micelle.domain.model.record;
 import java.util.Date;
 
 import lombok.Data;
-import xin.soren.micelle.common.Define;
+import xin.soren.micelle.common.define.Define;
 
 /**
  * 

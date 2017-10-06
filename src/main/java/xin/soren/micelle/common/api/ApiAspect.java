@@ -15,7 +15,7 @@ import org.springframework.validation.Errors;
 
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.CommonUtils;
-import xin.soren.micelle.common.Define;
+import xin.soren.micelle.common.define.Define;
 import xin.soren.micelle.exception.ExceptionCodeConst;
 import xin.soren.micelle.exception.ServiceException;
 
