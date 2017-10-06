@@ -12,6 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.common.define.DeleteStatus;
 import xin.soren.micelle.domain.mapper.bookmark.BookmarkMapper;
 import xin.soren.micelle.domain.model.bookmark.BookmarkEntity;
 
@@ -31,7 +32,7 @@ public class BookmarkServiceTest {
 				for (long i = 0; i < 3; i++) {
 					BookmarkEntity entity = new BookmarkEntity();
 					entity.category = "bookmark";
-					// entity.isDelete = DeleteStatus.NOT_DELETED;
+					entity.isDelete = DeleteStatus.NOT_DELETED;
 					entity.name = "name";
 					entity.parentId = 1L;
 					entity.url = "url";
@@ -53,8 +54,8 @@ public class BookmarkServiceTest {
 		// Assert.assertNotNull(bookmarkEntities);
 		// System.out.println(bookmarkEntities);
 
-		BookmarkEntity entity = mapper.getById(1L);
-		Assert.assertNotNull(entity);
-		System.out.println(entity);
+		// BookmarkEntity entity = mapper.getById(1L);
+		// Assert.assertNotNull(entity);
+		// System.out.println(entity);
 	}
 }
