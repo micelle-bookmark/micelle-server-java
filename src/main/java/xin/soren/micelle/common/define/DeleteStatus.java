@@ -1,6 +1,6 @@
 package xin.soren.micelle.common.define;
 
-public enum DeleteStatus {
+public enum DeleteStatus implements IEnumInt {
 	// 未删除
 	NOT_DELETED(0),
 	// 已删除
@@ -19,5 +19,10 @@ public enum DeleteStatus {
 	@Override
 	public String toString() {
 		return String.valueOf(this.value);
+	}
+
+	@Override
+	public int value() {
+		return this.value;
 	}
 }
