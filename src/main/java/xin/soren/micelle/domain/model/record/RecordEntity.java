@@ -3,7 +3,7 @@ package xin.soren.micelle.domain.model.record;
 import java.util.Date;
 
 import lombok.Data;
-import xin.soren.micelle.common.define.Define;
+import xin.soren.micelle.common.define.BookmarkOperateType;
 
 /**
  * 
@@ -17,7 +17,7 @@ public class RecordEntity {
 	private Long id;
 
 	private Long userId;
-	private Define.BookmarkOperateType op;
+	private BookmarkOperateType op;
 	private Long bookmarkId;
 	public String name;
 	public String url;
