@@ -1,6 +1,9 @@
 package xin.soren.micelle.domain.model.record;
 
+import java.util.Date;
+
 import lombok.Data;
+import xin.soren.micelle.common.Define;
 
 /**
  * 
@@ -11,5 +14,16 @@ import lombok.Data;
  */
 @Data
 public class RecordEntity {
+	private Long id;
 
+	private Long userId;
+	private Define.BookmarkOperateType op;
+	private Long bookmarkId;
+	public String name;
+	public String url;
+	public Long parentId;
+	public String category;
+
+	private Date createTime;
+	private Date modifyTime;
 }

@@ -31,8 +31,7 @@ public class BookmarkServiceTest {
 				for (int i = 0; i < 3; i++) {
 					BookmarkEntity entity = new BookmarkEntity();
 					entity.category = "bookmark";
-					entity.depth = 1L;
-					entity.isDelete = 0L;
+					entity.isDelete = 0;
 					entity.name = "name";
 					entity.parentId = 1L;
 					entity.url = "url";
