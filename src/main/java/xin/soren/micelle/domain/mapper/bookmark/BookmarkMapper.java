@@ -30,6 +30,6 @@ public interface BookmarkMapper {
 	@Insert("<script>INSERT INTO bookmark(user_id, name, url, parent_id, category, is_delete) " + "VALUES"
 			+ "<foreach item='bookmark' collection='bookmarks' open='' separator=',' close=''>" + "("
 			+ "#{bookmark.userId}, #{bookmark.name}, #{bookmark.url}, "
-			+ "#{bookmark.parentId}, #{bookmark.category, jdbcType=VARCHAR}, #{bookmark.isDelete, typeHandler=xin.soren.micelle.common.define.DeleteStatusHandler})</foreach></script>")
+			+ "#{bookmark.parentId}, #{bookmark.category, jdbcType=VARCHAR}, #{bookmark.isDelete, jdbcType=INTEGER, typeHandler=xin.soren.micelle.common.define.DeleteStatusHandler})</foreach></script>")
 	public Long insert(@Param("bookmarks") List<BookmarkEntity> bookmarks);
 }

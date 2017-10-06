@@ -3,6 +3,7 @@ package xin.soren.micelle.domain.model.bookmark;
 import java.util.Date;
 
 import lombok.Data;
+import xin.soren.micelle.common.define.BookmarkCategory;
 import xin.soren.micelle.common.define.DeleteStatus;
 
 /**
@@ -49,7 +50,7 @@ public class BookmarkEntity {
 	/**
 	 * 书签分类，dir=书签目录, bookmark=书签
 	 */
-	public String category;
+	public BookmarkCategory category;
 
 	/**
 	 * 创建时间
