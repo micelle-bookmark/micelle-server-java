@@ -1,6 +1,10 @@
 package xin.soren.micelle.service.id;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
@@ -10,18 +14,39 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
+@Slf4j
 public class DefaultIdServiceImpl implements IdService {
+
+	private static final Long TIMESTAMP_MASK = 0x000001FFFFFFFFFFL;
+	private static final Long TIMESTAMP_SHIFT_NUM = 22L;
+
+	private static final Long UUID_MASK = 0x00000000003FFFFFL;
 
 	@Override
 	public Long nextUserId() {
-		// TODO Auto-generated method stub
-		return null;
+		Integer uuid = UUID.randomUUID().hashCode();
+		Long id = generateId(System.currentTimeMillis(), uuid.longValue());
+
+		log.info("生成用户ID, {}", id);
+
+		return id;
 	}
 
 	@Override
 	public Long nextBookmarkId() {
-		// TODO Auto-generated method stub
-		return null;
+		Integer uuid = UUID.randomUUID().hashCode();
+		Long id = generateId(System.currentTimeMillis(), uuid.longValue());
+
+		log.info("生成书签ID, {}", id);
+
+		return id;
+	}
+
+	private Long generateId(Long timestamp, Long sequence) {
+		Long id = ((System.currentTimeMillis()
+				& DefaultIdServiceImpl.TIMESTAMP_MASK) << DefaultIdServiceImpl.TIMESTAMP_SHIFT_NUM)
+				| (sequence & DefaultIdServiceImpl.UUID_MASK);
+		return id;
 	}
 
 }
