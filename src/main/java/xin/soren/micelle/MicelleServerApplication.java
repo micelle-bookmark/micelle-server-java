@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @EnableAutoConfiguration
 @Slf4j
 public class MicelleServerApplication {
+
 	public static void main(String[] args) {
 		log.info("micelle server start");
 		SpringApplication.run(MicelleServerApplication.class, args);
