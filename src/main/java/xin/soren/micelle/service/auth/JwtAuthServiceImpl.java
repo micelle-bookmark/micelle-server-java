@@ -1,4 +1,4 @@
-package xin.soren.micelle.service.jwt;
+package xin.soren.micelle.service.auth;
 
 import java.util.Date;
 
@@ -11,24 +11,28 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
- * @Description: JWT 认证实现类
+ * @Description: 认证服务默认实现类
  * @author soren
- * @date 2017年10月8日 上午10:22:51
+ * @date 2017年9月29日 下午2:41:37
  *
  */
 @Service
 @ConfigurationProperties(prefix = "jwt")
 @Data
 @Slf4j
-public class DefaultJwtServiceImpl implements JwtService {
+public class JwtAuthServiceImpl implements AuthService {
 
 	private String secret;
 	private String id;
@@ -62,8 +66,17 @@ public class DefaultJwtServiceImpl implements JwtService {
 	@Override
 	public String parse(String jwt) {
 		SecretKey key = key();
-		Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(jwt).getBody();
-		return claims.getSubject();
+		try {
+			Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(jwt).getBody();
+			return claims.getSubject();
+		} catch (ExpiredJwtException e) {
+			return null;
+		} catch (SignatureException e) {
+			return null;
+		} catch (UnsupportedJwtException | MalformedJwtException e) {
+			return null;
+		} catch (IllegalArgumentException e) {
+			return null;
+		}
 	}
-
 }
