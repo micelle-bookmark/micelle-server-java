@@ -1,5 +1,8 @@
 package xin.soren.micelle.common.script;
 
+import java.lang.reflect.Method;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.expression.Expression;
@@ -24,6 +27,7 @@ public class SpringELParserImpl extends IScriptParser {
 	private static final String RET_VAL = "retVal";
 
 	private final ConcurrentHashMap<String, Expression> expCache = new ConcurrentHashMap<String, Expression>();
+	private final ConcurrentHashMap<String, Method> funcs = new ConcurrentHashMap<String, Method>(64);
 
 	private final ExpressionParser parser = new SpelExpressionParser();
 
@@ -38,12 +42,12 @@ public class SpringELParserImpl extends IScriptParser {
 
 		StandardEvaluationContext context = new StandardEvaluationContext();
 
-		// Iterator<Map.Entry<String, Method>> it =
-		// funcs.entrySet().iterator();
-		// while (it.hasNext()) {
-		// Map.Entry<String, Method> entry = it.next();
-		// context.registerFunction(entry.getKey(), entry.getValue());
-		// }
+		Iterator<Map.Entry<String, Method>> it = funcs.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<String, Method> entry = it.next();
+			context.registerFunction(entry.getKey(), entry.getValue());
+		}
+
 		context.setVariable(ARGS, args);
 		if (hasRetVal) {
 			context.setVariable(RET_VAL, retVal);
@@ -53,8 +57,14 @@ public class SpringELParserImpl extends IScriptParser {
 			expression = parser.parseExpression(exp);
 			expCache.put(exp, expression);
 
-			log.info("Cache expresion: {}", exp);
+			log.info("缓存 SpringEL 表达式: {}", exp);
 		}
 		return expression.getValue(context, valueType);
+	}
+
+	@Override
+	public void addFunction(String name, Method method) {
+		log.info("增加 SpringEL 函数: {}", name);
+		funcs.put(name, method);
 	}
 }
