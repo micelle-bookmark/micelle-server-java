@@ -1,6 +1,9 @@
 package xin.soren.micelle.service.id;
 
+import java.util.Calendar;
 import java.util.UUID;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Service;
 
@@ -23,19 +26,28 @@ public class DefaultIdServiceImpl implements IdService {
 
 	private static final Long UUID_MASK = 0x00000000003FFFFFL;
 
-	@Override
-	@WriteLog(value = "'生成用户ID: '+#retVal")
-	public Long nextUserId() {
-		Long id = generateId();
-		// log.info("生成用户ID, {}", id);
-		return id;
+	private Calendar calendarDatum = Calendar.getInstance();
+	private Long timeDatum;
+
+	@PostConstruct
+	public void init() {
+		calendarDatum.set(2017, 1, 26, 0, 0, 0);
+		timeDatum = calendarDatum.getTimeInMillis();
+
+		log.info("使用基准时间: {}, {}", calendarDatum, timeDatum);
 	}
 
 	@Override
+	@WriteLog(value = "'生成用户ID: '+#retVal")
+
+	public Long nextUserId() {
+		return generateId();
+	}
+
+	@Override
+	@WriteLog(value = "'生成书签ID: '+#retVal")
 	public Long nextBookmarkId() {
-		Long id = generateId();
-		log.info("生成书签ID, {}", id);
-		return id;
+		return generateId();
 	}
 
 	private Long generateId() {
@@ -44,7 +56,7 @@ public class DefaultIdServiceImpl implements IdService {
 	}
 
 	private Long generateId(Long timestamp, Long sequence) {
-		Long id = ((System.currentTimeMillis()
+		Long id = (((System.currentTimeMillis() - timeDatum)
 				& DefaultIdServiceImpl.TIMESTAMP_MASK) << DefaultIdServiceImpl.TIMESTAMP_SHIFT_NUM)
 				| (sequence & DefaultIdServiceImpl.UUID_MASK);
 		return id;

@@ -27,13 +27,8 @@ public class WriteLogAspect {
 
 	private final ExpressionParser parser = new SpelExpressionParser();
 
-	protected static final String ARGS = "args";
-
-	protected static final String RET_VAL = "retVal";
-
-	protected static final String HASH = "hash";
-
-	protected static final String EMPTY = "empty";
+	private static final String ARGS = "args";
+	private static final String RET_VAL = "retVal";
 
 	@Pointcut("@annotation(xin.soren.micelle.common.log.WriteLog)")
 	public void annotationPointCut() {
@@ -79,10 +74,29 @@ public class WriteLogAspect {
 			value = expression.getValue(context, String.class);
 		}
 
-		log.info(value);
+		doLog(writeLog.level(), value);
 	}
 
 	private void doLogBefore(ProceedingJoinPoint pjp, WriteLog writeLog) {
-		log.info("doLogBefore");
+		doLog(writeLog.level(), "doLogBefore");
+	}
+
+	private void doLog(WriteLog.LogLevel logLevel, String logString) {
+		switch (logLevel) {
+		case DEBUG:
+			log.debug(logString);
+			break;
+		case INFO:
+			log.info(logString);
+			break;
+		case WARN:
+			log.warn(logString);
+			break;
+		case ERROR:
+			log.error(logString);
+			break;
+		default:
+			break;
+		}
 	}
 }

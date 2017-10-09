@@ -32,7 +32,7 @@ public class UserController {
 	@PostConstruct
 	public void init() {
 		idService.nextUserId();
-		idService.nextUserId();
+		idService.nextBookmarkId();
 	}
 
 	/**

@@ -28,6 +28,6 @@ public @interface WriteLog {
 	}
 
 	public enum LogLevel {
-		DEBUG, INFO, WARN, ERROR, CRITICAL
+		DEBUG, INFO, WARN, ERROR
 	}
 }
