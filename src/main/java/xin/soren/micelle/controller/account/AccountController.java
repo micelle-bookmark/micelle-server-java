@@ -22,6 +22,7 @@ import xin.soren.micelle.gateway.user.UserApiSerivce;
  *
  */
 @RestController
+@RequestMapping("/api")
 @Slf4j
 public class AccountController {
 
@@ -37,7 +38,7 @@ public class AccountController {
 	 * @Throws
 	 * @Date 2017年9月25日 下午9:17:14
 	 */
-	@RequestMapping(value = "/api/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@Api
 	public Object login(@Valid @RequestBody LoginParam param, Errors errors) {
 		log.info("登录请求, 参数: {}", param);
@@ -52,7 +53,7 @@ public class AccountController {
 	 * @Throws
 	 * @Date 2017年9月25日 下午9:17:22
 	 */
-	@RequestMapping(value = "/api/logout", method = RequestMethod.POST)
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	@Api
 	public Object logout() {
 		return null;
@@ -67,7 +68,7 @@ public class AccountController {
 	 * @Throws
 	 * @Date 2017年9月25日 下午9:17:31
 	 */
-	@RequestMapping(value = "/api/register", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@Api
 	public Object register(@Valid @RequestBody LoginParam param, Errors errors) {
 		log.info("注册请求, 参数: {}", param);

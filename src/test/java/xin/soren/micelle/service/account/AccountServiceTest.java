@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -15,6 +17,7 @@ import xin.soren.micelle.domain.model.account.AccountEntity;
 @SpringBootTest
 @Slf4j
 @ActiveProfiles("test")
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class AccountServiceTest {
 	@Autowired
 	AccountMapper mapper;
@@ -55,10 +58,10 @@ public class AccountServiceTest {
 		log.info("account entity: {}", entity);
 	}
 
-	// @Test
-	// public void testGetAccountById() {
-	// log.info("test select account by id");
-	//
-	// AccountEntity accountEntity = mapper.getById(1L);
-	// }
+	@Test
+	public void testGetAccountById() {
+		log.info("test select account by id");
+
+		AccountEntity accountEntity = mapper.getById(1L);
+	}
 }
