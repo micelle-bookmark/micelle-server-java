@@ -50,6 +50,12 @@ public class DefaultIdServiceImpl implements IdService {
 		return generateId();
 	}
 
+	@Override
+	@WriteLog(value = "'生成 RecordID: '+#retVal")
+	public Long nextRecordId() {
+		return generateId();
+	}
+
 	private Long generateId() {
 		Integer uuid = UUID.randomUUID().hashCode();
 		return generateId(System.currentTimeMillis(), uuid.longValue());

@@ -25,4 +25,13 @@ public interface IdService {
 	 * @Date 2017年9月24日 下午7:52:18
 	 */
 	public Long nextBookmarkId();
+
+	/**
+	 * 
+	 * @Description: 获取下一个可用的 Record ID
+	 * @return
+	 * @Throws
+	 * @Date 2017年10月9日 下午6:12:30
+	 */
+	public Long nextRecordId();
 }

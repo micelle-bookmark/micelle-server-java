@@ -1,4 +1,4 @@
-package xin.soren.micelle.common;
+package xin.soren.micelle.controller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
