@@ -3,8 +3,8 @@ package xin.soren.micelle.common;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,7 +21,7 @@ import xin.soren.micelle.exception.ExceptionCodeConst;
  * @date 2017年9月13日 下午8:43:21
  *
  */
-@Component
+@ControllerAdvice
 @Slf4j
 public class ExceptionHandlerAdvice {
 

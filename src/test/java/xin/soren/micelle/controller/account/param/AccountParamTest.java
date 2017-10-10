@@ -11,6 +11,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.Test;
 
 public class AccountParamTest {
+
 	@Test
 	public void testOkOnLoginClass() {
 		AccountParam param = new AccountParam();
@@ -20,6 +21,7 @@ public class AccountParamTest {
 		ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
 		Set<ConstraintViolation<AccountParam>> violations = vf.getValidator().validate(param, AccountParam.Login.class);
 
+		// 没有使用 spring boot, 所以 message 是不正确的
 		// for (ConstraintViolation<AccountParam> p : violations) {
 		// System.out.println(p.getMessage());
 		// }

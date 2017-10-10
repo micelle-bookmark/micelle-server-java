@@ -29,6 +29,10 @@ public class UrlValidator implements ConstraintValidator<Url, String> {
 
 	@Override
 	public boolean isValid(String paramT, ConstraintValidatorContext paramConstraintValidatorContext) {
+		if (paramT == null || paramT.isEmpty()) {
+			return false;
+		}
+
 		if (!VALID_URL_ADDRESS_REGEX.matcher(paramT).find()) {
 			log.info("Validation Fail Email Address: {}", paramT);
 			return false;

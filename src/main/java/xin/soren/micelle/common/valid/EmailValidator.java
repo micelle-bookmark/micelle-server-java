@@ -32,6 +32,10 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
 	 */
 	@Override
 	public boolean isValid(String arg0, ConstraintValidatorContext arg1) {
+		if (arg0 == null || arg0.isEmpty()) {
+			return false;
+		}
+
 		if (!VALID_EMAIL_ADDRESS_REGEX.matcher(arg0).find()) {
 			log.info("Validation Fail Email Address: {}", arg0);
 			return false;
