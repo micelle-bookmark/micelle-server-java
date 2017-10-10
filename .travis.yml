@@ -1,0 +1,30 @@
+language: java
+
+sudo: required
+dist: trusty
+
+jdk:
+- oraclejdk8
+
+before_install:
+# - ./script/install-packages.sh
+
+before_script:
+# - cd "${TRAVIS_BUILD_DIR}"
+# - export GO15VENDOREXPERIMENT=1
+# - go get -u -v github.com/tools/godep
+# - cd src
+
+script:
+# - godep go test ./... -v
+# exclude vendor dir under go1.9
+# - go test $(go list ./...|grep -v vendor) -v
+
+branches:
+  only:
+  - master
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
