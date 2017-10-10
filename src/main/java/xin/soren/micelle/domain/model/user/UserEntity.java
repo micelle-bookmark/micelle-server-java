@@ -23,7 +23,7 @@ public class UserEntity {
 	private Long id;
 
 	/**
-	 * 该用户关联的 accountId
+	 * 该用户关联的 accountId, 当前实现中等价于 userId
 	 */
 	private Long accountId;
 

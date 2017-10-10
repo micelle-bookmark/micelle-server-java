@@ -1,9 +1,8 @@
 package xin.soren.micelle.controller.account;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.api.Api;
-import xin.soren.micelle.controller.account.param.LoginParam;
+import xin.soren.micelle.controller.account.param.AccountParam;
 import xin.soren.micelle.gateway.user.UserApiSerivce;
 
 /**
@@ -40,7 +39,7 @@ public class AccountController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@Api
-	public Object login(@Valid @RequestBody LoginParam param, Errors errors) {
+	public Object login(@Validated(AccountParam.Login.class) @RequestBody AccountParam param, Errors errors) {
 		log.info("登录请求, 参数: {}", param);
 
 		return null;
@@ -70,7 +69,7 @@ public class AccountController {
 	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@Api
-	public Object register(@Valid @RequestBody LoginParam param, Errors errors) {
+	public Object register(@Validated(AccountParam.Register.class) @RequestBody AccountParam param, Errors errors) {
 		log.info("注册请求, 参数: {}", param);
 
 		return null;
