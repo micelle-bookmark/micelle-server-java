@@ -11,9 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class MicelleServerApplicationTests {
-
 	@Test
 	public void contextLoads() {
 	}
-
 }

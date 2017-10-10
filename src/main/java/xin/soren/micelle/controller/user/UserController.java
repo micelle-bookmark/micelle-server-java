@@ -3,7 +3,6 @@ package xin.soren.micelle.controller.user;
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.api.Api;
 import xin.soren.micelle.controller.user.param.TestParam;
-import xin.soren.micelle.service.id.IdService;
 
 /**
  * 
@@ -26,12 +24,8 @@ import xin.soren.micelle.service.id.IdService;
 @Slf4j
 public class UserController {
 
-	@Autowired
-	IdService idService;
-
 	@PostConstruct
 	public void init() {
-		idService.nextRecordId();
 	}
 
 	/**
