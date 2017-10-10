@@ -2,6 +2,8 @@ package xin.soren.micelle.exception;
 
 import java.text.MessageFormat;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * 
  * @Description: 应用内部异常类
@@ -16,7 +18,11 @@ public class ServiceException extends ExceptionBase {
 	private static final long serialVersionUID = 1L;
 
 	public ServiceException(long code, String msg) {
-		super(code, msg);
+		super(code, msg, HttpStatus.OK);
+	}
+
+	public ServiceException(long code, String msg, HttpStatus statusCode) {
+		super(code, msg, statusCode);
 	}
 
 	@Override

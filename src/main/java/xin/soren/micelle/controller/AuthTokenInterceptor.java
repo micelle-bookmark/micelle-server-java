@@ -8,6 +8,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.define.Define;
+import xin.soren.micelle.exception.auth.LessTokenAuthException;
 
 /**
  * 
@@ -27,11 +28,10 @@ public class AuthTokenInterceptor extends HandlerInterceptorAdapter {
 		String token = request.getHeader(Define.TOKEN_HEADER_NAME);
 		if (null == token) {
 			log.info("请求 {} 中的 {} 认证字段不存在", request.getRequestURL().toString(), Define.TOKEN_HEADER_NAME);
-			throw new RuntimeException();
+			throw new LessTokenAuthException();
 		}
 
 		String body = AuthTokenHelper.parse(token);
-
 		return true;
 	}
 }

@@ -21,6 +21,15 @@ public class ExceptionCodeConst {
 	// 参数错误
 	public static final Long C_API_ARGS_ERROR = 100002L;
 
+	// 缺少 token
+	public static final Long C_AUTH_LESS_TOKEN = 100100L;
+	// token 过期
+	public static final Long C_AUTH_TIMEOUT = 100101L;
+	// 无效的 token 值, 包括格式错误, 签名错误等
+	public static final Long C_AUTH_INVALID = 100102L;
+	// 内部认证错误
+	public static final Long C_AUTH_INTERVAL_ERROR = 100103L;
+
 	// 数据库错误
 	public static final Long S_DATABASE_ERROR = 200000L;
 }

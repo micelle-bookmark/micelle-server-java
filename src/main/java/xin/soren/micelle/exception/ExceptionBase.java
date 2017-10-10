@@ -2,6 +2,8 @@ package xin.soren.micelle.exception;
 
 import java.text.MessageFormat;
 
+import org.springframework.http.HttpStatus;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -22,6 +24,7 @@ public class ExceptionBase extends RuntimeException {
 
 	private long errorCode = ExceptionCodeConst.UNKNOWN_ERROR;
 	private String errorMsg = "未知错误";
+	private HttpStatus statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
 
 	@Override
 	public String toString() {

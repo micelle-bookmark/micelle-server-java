@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.define.Define;
+import xin.soren.micelle.exception.auth.InvalidAuthException;
 import xin.soren.micelle.service.auth.AuthService;
 
 /**
@@ -40,7 +41,7 @@ public class AuthTokenHelper {
 		assert token != null;
 
 		if (!token.startsWith(Define.TOKEN_HEADER_VALUE_PREFIX)) {
-			return null;
+			throw new InvalidAuthException("token 格式错误");
 		}
 
 		return AuthTokenHelper.authService.parse(token.replace(Define.TOKEN_HEADER_VALUE_PREFIX, ""));

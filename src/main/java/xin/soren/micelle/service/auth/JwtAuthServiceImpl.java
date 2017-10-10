@@ -1,5 +1,6 @@
 package xin.soren.micelle.service.auth;
 
+import java.text.MessageFormat;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
@@ -20,6 +21,9 @@ import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.exception.auth.InternalAuthException;
+import xin.soren.micelle.exception.auth.InvalidAuthException;
+import xin.soren.micelle.exception.auth.TimeoutAuthException;
 
 /**
  * 
@@ -70,13 +74,11 @@ public class JwtAuthServiceImpl implements AuthService {
 			Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(jwt).getBody();
 			return claims.getSubject();
 		} catch (ExpiredJwtException e) {
-			return null;
-		} catch (SignatureException e) {
-			return null;
-		} catch (UnsupportedJwtException | MalformedJwtException e) {
-			return null;
+			throw new TimeoutAuthException();
+		} catch (SignatureException | UnsupportedJwtException | MalformedJwtException e) {
+			throw new InvalidAuthException(MessageFormat.format("无效的token值: {0}", e));
 		} catch (IllegalArgumentException e) {
-			return null;
+			throw new InternalAuthException();
 		}
 	}
 }

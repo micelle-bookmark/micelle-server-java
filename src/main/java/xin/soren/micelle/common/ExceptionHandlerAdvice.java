@@ -1,5 +1,7 @@
 package xin.soren.micelle.common;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -35,11 +37,11 @@ public class ExceptionHandlerAdvice {
 	}
 
 	@ExceptionHandler(value = ExceptionBase.class)
-	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public Object handleExceptionBase(ExceptionBase exceptionBase) {
+	public Object handleExceptionBase(ExceptionBase exceptionBase, HttpServletResponse rsp) {
 		log.error("内部错误, {}", ExceptionUtils.getStackTrace(exceptionBase));
 
+		rsp.setStatus(exceptionBase.getStatusCode().value());
 		return new ApiResponseError(exceptionBase.getErrorCode(), exceptionBase.getErrorMsg());
 	}
 
@@ -52,23 +54,11 @@ public class ExceptionHandlerAdvice {
 		return new ApiResponseError(ExceptionCodeConst.C_ARGS_REQUIRED, exception.getMessage());
 	}
 
-	// @ExceptionHandler(value = ForbiddenException.class)
-	// @ResponseBody
-	// public Object handleExceptionBase(ForbiddenException exceptionBase,
-	// HttpServletResponse rsp) {
-	// log.error(MessageFormat.format("{0}",
-	// ExceptionUtils.getStackTrace(exceptionBase)));
-	//
-	// rsp.setStatus(HttpStatus.FORBIDDEN.value());
-	// return new ApiErrorResponse(exceptionBase.getErrorCode(),
-	// exceptionBase.getErrorMsg());
-	// }
-	//
 	@ExceptionHandler(value = DataAccessException.class)
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public Object handleExcetptionBase(DataAccessException exception) {
-		log.error("数据库错误 {}", ExceptionUtils.getStackTrace(exception));
+		log.error("数据库错误, {}", ExceptionUtils.getStackTrace(exception));
 
 		return new ApiResponseError(ExceptionCodeConst.S_DATABASE_ERROR, "数据库错误");
 	}
