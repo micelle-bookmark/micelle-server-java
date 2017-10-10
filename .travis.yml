@@ -8,6 +8,7 @@ jdk:
 
 before_install:
 # - ./script/install-packages.sh
+- chmod +x mvnw
 
 before_script:
 # - cd "${TRAVIS_BUILD_DIR}"
