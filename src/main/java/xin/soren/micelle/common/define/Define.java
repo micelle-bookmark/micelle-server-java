@@ -12,4 +12,13 @@ public class Define {
 	 * 错误信息中的分段字符
 	 */
 	static public final String VALIDATION_MESSAGE_SPLIT_STRING = "##";
+
+	/**
+	 * HTTP HEADER 中存储 token 字段的名称
+	 */
+	static public final String TOKEN_HEADER_NAME = "Authorization";
+	/**
+	 * token 字段的前缀
+	 */
+	static public final String TOKEN_HEADER_VALUE_PREFIX = "Bearer ";
 }

@@ -11,6 +11,13 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 
+ * @Description: 日志支持拦截器
+ * @author soren
+ * @date 2017年10月10日 下午6:26:09
+ *
+ */
 @Component
 @Slf4j
 public class UrlLoggingInterceptor extends HandlerInterceptorAdapter {

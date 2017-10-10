@@ -12,8 +12,16 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		return new UrlLoggingInterceptor();
 	}
 
+	@Bean
+	public AuthTokenInterceptor authTokenInterceptor() {
+		return new AuthTokenInterceptor();
+	}
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(urlLoggingInterceptor());
+
+		registry.addInterceptor(authTokenInterceptor()).excludePathPatterns("/api/login")
+				.excludePathPatterns("/api/register");
 	}
 }
