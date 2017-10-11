@@ -7,13 +7,17 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
 import xin.soren.micelle.domain.model.user.UserEntity;
 
 @Mapper
 public interface UserMapper {
-	@Select("select id, account_id, user_name, avatar, email, create_time, modify_time " + "from user where id=#{arg0}")
+	// @Select("select id, account_id, user_name, avatar, email, create_time,
+	// modify_time " + "from user where id=#{arg0}")
+
+	@SelectProvider(type = UserSqlProvider.class, method = "getByUserId")
 	@Results(id = "default", value = { @Result(property = "accountId", column = "account_id"),
 			@Result(property = "userName", column = "user_name"),
 			@Result(property = "createTime", column = "create_time"),
