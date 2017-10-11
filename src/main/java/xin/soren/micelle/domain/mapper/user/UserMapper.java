@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.UpdateProvider;
 
 import xin.soren.micelle.domain.model.user.UserEntity;
 
@@ -37,10 +38,13 @@ public interface UserMapper {
 	@Update("update user set user_name=#{userName} where id=#{id}")
 	public Long updateUserName(@Param("id") Long id, @Param("userName") String userName);
 
-	@Update({ "<script>" + "UPDATE user SET " + "<trim prefix=' ' suffix=' ' suffixOverrides=',' >"
-			+ "<if test='#{c.userName} != null'> user_name=#{c.userName}, </if>"
-			+ "<if test='#{c.avatar} != null'> avatar=#{c.avatar}, </if>"
-			+ "<if test='#{c.email} != null'> email=#{c.email}, </if>" + "</trim>" + " WHERE id=#{c.id}"
-			+ "</script>" })
+	// @Update({ "<script>" + "UPDATE user SET " + "<trim prefix=' ' suffix=' '
+	// suffixOverrides=',' >"
+	// + "<if test='#{c.userName} != null'> user_name=#{c.userName}, </if>"
+	// + "<if test='#{c.avatar} != null'> avatar=#{c.avatar}, </if>"
+	// + "<if test='#{c.email} != null'> email=#{c.email}, </if>" + "</trim>" +
+	// " WHERE id=#{c.id}"
+	// + "</script>" })
+	@UpdateProvider(type = UserSqlProvider.class, method = "updateSelective")
 	public Long updateSelective(@Param("c") UserEntity account);
 }
