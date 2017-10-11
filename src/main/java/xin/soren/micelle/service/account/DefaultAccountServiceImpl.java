@@ -1,10 +1,13 @@
 package xin.soren.micelle.service.account;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.common.CommonUtils;
+import xin.soren.micelle.common.log.WriteLog;
 import xin.soren.micelle.domain.mapper.account.AccountMapper;
 import xin.soren.micelle.domain.model.account.AccountEntity;
 
@@ -24,6 +27,7 @@ public class DefaultAccountServiceImpl implements AccountService {
 
 	@Override
 	@Transactional
+	@WriteLog("'创建帐号, accountId: '+#args[0]+' , name: '+#args[1]")
 	public Long createAccount(Long id, String accountName, String password, String salt) {
 		log.info("创建账户, id={}, accountName={}, password={}, salt={}", id, accountName, password, salt);
 
@@ -43,4 +47,23 @@ public class DefaultAccountServiceImpl implements AccountService {
 		return accountMapper.getById(id);
 	}
 
+	@Transactional
+	@Override
+	@WriteLog(value = "'创建帐号, accountId: '+#args[0]")
+	public Long createAccount(Long accountId, String password) {
+		assert accountId != null;
+		assert password != null;
+
+		Pair<String, String> pwdPair = CommonUtils.encrypt(password);
+		String salt = pwdPair.getRight();
+		String accountName = String.valueOf(accountId);
+
+		AccountEntity accountEntity = new AccountEntity();
+		accountEntity.setId(accountId);
+		accountEntity.setAccountName(accountName);
+		accountEntity.setPassword(pwdPair.getLeft());
+		accountEntity.setSalt(salt);
+
+		return accountId;
+	}
 }

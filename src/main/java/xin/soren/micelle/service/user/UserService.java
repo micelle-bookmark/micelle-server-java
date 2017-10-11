@@ -1,5 +1,6 @@
 package xin.soren.micelle.service.user;
 
+import xin.soren.micelle.controller.account.param.AccountParam;
 import xin.soren.micelle.domain.model.user.UserEntity;
 
 /**
@@ -17,7 +18,7 @@ public interface UserService {
 	 * @param userName
 	 * @return
 	 */
-	public Long createUser(Long id, String userName);
+	public Long createUser(AccountParam param);
 
 	/**
 	 * 

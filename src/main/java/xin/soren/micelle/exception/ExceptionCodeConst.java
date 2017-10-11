@@ -32,4 +32,7 @@ public class ExceptionCodeConst {
 
 	// 数据库错误
 	public static final Long S_DATABASE_ERROR = 200000L;
+
+	// 加解密错误
+	public static final Long S_ENCRYPT_ERROR = 200100L;
 }

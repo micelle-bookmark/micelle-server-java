@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -16,6 +17,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.exception.EncryptException;
 
 /**
  * 
@@ -57,8 +59,13 @@ public class CommonUtils {
 	 * @Throws
 	 * @Date 2017年10月11日 下午2:15:44
 	 */
-	public static String base64Encode(String arg) throws UnsupportedEncodingException {
-		return new String(Base64.encodeBase64(arg.getBytes(UTF8)));
+	public static String base64Encode(String arg) {
+		try {
+			return new String(Base64.encodeBase64(arg.getBytes(UTF8)));
+		} catch (UnsupportedEncodingException e) {
+			log.error("base64编码错误, {}", ExceptionUtils.getStackTrace(e));
+			throw new EncryptException(e.toString());
+		}
 	}
 
 	/**
@@ -70,8 +77,13 @@ public class CommonUtils {
 	 * @Throws
 	 * @Date 2017年10月11日 下午2:16:30
 	 */
-	public static String base64Decode(String arg) throws UnsupportedEncodingException {
-		return new String(Base64.decodeBase64(arg.getBytes(UTF8)));
+	public static String base64Decode(String arg) {
+		try {
+			return new String(Base64.decodeBase64(arg.getBytes(UTF8)));
+		} catch (UnsupportedEncodingException e) {
+			log.error("base64解码错误, {}", ExceptionUtils.getStackTrace(e));
+			throw new EncryptException(e.toString());
+		}
 	}
 
 	/**
@@ -83,11 +95,17 @@ public class CommonUtils {
 	 * @Throws
 	 * @Date 2017年10月11日 下午2:19:18
 	 */
-	public static String md5(String arg) throws NoSuchAlgorithmException {
+	public static String md5(String arg) {
 		byte[] bs = arg.getBytes();
-		MessageDigest digest = MessageDigest.getInstance(MD5);
-		digest.update(bs);
-		return Hex.encodeHexString(digest.digest());
+		MessageDigest digest;
+		try {
+			digest = MessageDigest.getInstance(MD5);
+			digest.update(bs);
+			return Hex.encodeHexString(digest.digest());
+		} catch (NoSuchAlgorithmException e) {
+			log.error("md5编码错误, {}", ExceptionUtils.getStackTrace(e));
+			throw new EncryptException(e.toString());
+		}
 	}
 
 	/**
@@ -100,11 +118,11 @@ public class CommonUtils {
 	 * @Throws
 	 * @Date 2017年10月11日 下午2:21:16
 	 */
-	public static String encrypt(String pwd, String salt) throws NoSuchAlgorithmException {
+	public static String encrypt(String pwd, String salt) {
 		return md5(pwd + salt);
 	}
 
-	public static Pair<String, String> encrypt(String pwd) throws NoSuchAlgorithmException {
+	public static Pair<String, String> encrypt(String pwd) {
 		String salt = UUID.randomUUID().toString();
 		String md5Pwd = encrypt(pwd, salt);
 		return Pair.of(md5Pwd, salt);

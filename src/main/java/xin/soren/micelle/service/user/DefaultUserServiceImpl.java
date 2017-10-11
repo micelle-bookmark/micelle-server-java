@@ -5,8 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.controller.account.param.AccountParam;
 import xin.soren.micelle.domain.mapper.user.UserMapper;
 import xin.soren.micelle.domain.model.user.UserEntity;
+import xin.soren.micelle.service.account.AccountService;
+import xin.soren.micelle.service.id.IdService;
 
 /**
  * 
@@ -21,10 +24,18 @@ public class DefaultUserServiceImpl implements UserService {
 	@Autowired
 	UserMapper userMapper;
 
+	@Autowired
+	private IdService idService;
+
+	@Autowired
+	private AccountService accountService;
+
 	@Override
 	@Transactional
-	public Long createUser(Long id, String userName) {
-		log.info("创建用户, id={}, userName={}", id, userName);
+	public Long createUser(AccountParam param) {
+		Long id = idService.nextUserId();
+
+		log.info("创建用户, id={}, userName={}", id, param);
 
 		return id;
 	}

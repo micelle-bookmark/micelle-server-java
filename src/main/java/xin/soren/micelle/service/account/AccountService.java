@@ -25,6 +25,17 @@ public interface AccountService {
 
 	/**
 	 * 
+	 * @Description: 创建帐号
+	 * @param accountId
+	 * @param password
+	 * @return
+	 * @Throws
+	 * @Date 2017年10月11日 下午2:30:33
+	 */
+	public Long createAccount(Long accountId, String password);
+
+	/**
+	 * 
 	 * @Description: 根据帐号 ID 获取帐号信息
 	 * @param id
 	 * @return
