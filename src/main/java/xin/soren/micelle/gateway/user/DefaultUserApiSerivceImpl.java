@@ -2,11 +2,11 @@ package xin.soren.micelle.gateway.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.domain.model.user.UserEntity;
+import xin.soren.micelle.exception.UserNotExsitException;
 import xin.soren.micelle.service.account.AccountService;
-import xin.soren.micelle.service.id.IdService;
 import xin.soren.micelle.service.user.UserService;
 
 /**
@@ -21,9 +21,6 @@ import xin.soren.micelle.service.user.UserService;
 public class DefaultUserApiSerivceImpl implements UserApiSerivce {
 
 	@Autowired
-	IdService idService;
-
-	@Autowired
 	UserService userService;
 
 	@Autowired
@@ -33,16 +30,19 @@ public class DefaultUserApiSerivceImpl implements UserApiSerivce {
 	public Long createUser(String userName, String password) {
 		log.info("创建用户帐号与信息, userName={}, password={}", userName, password);
 
-		Long userId = idService.nextUserId();
-		return doCreateUser(userId, userName, password);
+		return null;
 	}
 
-	@Transactional
-	public Long doCreateUser(Long id, String userName, String password) {
-		accountService.createAccount(id, userName, password, "");
-		userService.createUser(id, userName);
+	@Override
+	public User getUserInfo(Long userId) {
+		UserEntity userEntity = userService.getUserById(userId);
+		if (userEntity == null) {
+			log.error("用户不存在, id={}", userId);
+			throw new UserNotExsitException();
+		}
 
-		return id;
+		return User.builder().userId(userEntity.getId()).userName(userEntity.getUserName())
+				.avatar(userEntity.getAvatar()).email(userEntity.getEmail()).build();
 	}
 
 }

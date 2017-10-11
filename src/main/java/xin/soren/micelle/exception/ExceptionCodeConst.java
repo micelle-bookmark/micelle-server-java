@@ -35,4 +35,7 @@ public class ExceptionCodeConst {
 
 	// 加解密错误
 	public static final Long S_ENCRYPT_ERROR = 200100L;
+
+	// 用户不存在
+	public static final Long S_USER_DOESNOT_EXSIT = 201001L;
 }

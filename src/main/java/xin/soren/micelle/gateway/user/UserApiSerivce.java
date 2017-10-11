@@ -18,4 +18,14 @@ public interface UserApiSerivce {
 	 * @Date 2017年9月25日 下午9:23:44
 	 */
 	public Long createUser(String userName, String password);
+
+	/**
+	 * 
+	 * @Description: 获取用户信息
+	 * @param userId
+	 * @return
+	 * @Throws
+	 * @Date 2017年10月11日 下午2:47:47
+	 */
+	public User getUserInfo(Long userId);
 }
