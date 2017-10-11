@@ -20,7 +20,7 @@ import xin.soren.micelle.common.valid.Url;
 @Data
 @NoArgsConstructor
 public class AccountParam {
-	@NotNull(message = "缺少参数 userName")
+	@NotNull(message = "{param.userName.null}")
 	@Length(min = 1, message = "参数 userName 长度错误")
 	public String userName;
 

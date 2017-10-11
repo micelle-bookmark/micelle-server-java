@@ -20,6 +20,10 @@ public class AccountParamTest {
 		ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
 		Set<ConstraintViolation<AccountParam>> violations = vf.getValidator().validate(param, AccountParam.Login.class);
 
+		// for (ConstraintViolation<AccountParam> p : violations) {
+		// System.out.println(p.getMessage());
+		// }
+
 		assertEquals(violations.size(), 0);
 	}
 
