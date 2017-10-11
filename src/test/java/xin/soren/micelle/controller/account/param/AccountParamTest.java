@@ -28,7 +28,7 @@ public class AccountParamTest {
 		AccountParam param = new AccountParam();
 		param.userName = "123";
 		param.password = "123";
-		param.avatar = "123";
+		param.avatar = "http://123.com";
 		param.email = "123@qq.com";
 
 		ValidatorFactory vf = Validation.buildDefaultValidatorFactory();

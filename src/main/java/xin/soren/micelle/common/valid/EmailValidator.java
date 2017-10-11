@@ -20,12 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EmailValidator implements ConstraintValidator<Email, String> {
 
-	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
-			Pattern.CASE_INSENSITIVE);
+	private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern
+			.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
 	@Override
 	public void initialize(Email arg0) {
-		log.info("initialize");
 	}
 
 	/**
@@ -33,6 +32,11 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
 	 */
 	@Override
 	public boolean isValid(String arg0, ConstraintValidatorContext arg1) {
-		return VALID_EMAIL_ADDRESS_REGEX.matcher(arg0).find();
+		if (!VALID_EMAIL_ADDRESS_REGEX.matcher(arg0).find()) {
+			log.info("Validation Fail Email Address: {}", arg0);
+			return false;
+		}
+
+		return true;
 	}
 }
