@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.api.Api;
+import xin.soren.micelle.controller.user.param.ModifyPasswordParam;
+import xin.soren.micelle.controller.user.param.ModifyUserInfoParam;
 import xin.soren.micelle.controller.user.param.TestParam;
 
 /**
@@ -21,6 +24,7 @@ import xin.soren.micelle.controller.user.param.TestParam;
  *
  */
 @RestController
+@RequestMapping("/api/user")
 @Slf4j
 public class UserController {
 
@@ -37,7 +41,7 @@ public class UserController {
 	 * @Throws
 	 * @Date 2017年9月25日 下午9:20:35
 	 */
-	@RequestMapping(value = "/api/user", method = RequestMethod.POST)
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	@Api
 	public Object getUserInfo(@Valid @RequestBody TestParam param, Errors errors) {
 		log.info("登录请求, 参数: {}", param);
@@ -52,9 +56,24 @@ public class UserController {
 	 * @Throws
 	 * @Date 2017年9月25日 下午9:20:54
 	 */
-	@RequestMapping(value = "/api/user", method = RequestMethod.PATCH)
+	@RequestMapping(value = "", method = RequestMethod.PATCH)
 	@Api
-	public Object modifyUserInfo() {
+	public Object modifyUserInfo(@Validated @RequestBody ModifyUserInfoParam param, Errors errors) {
+		return null;
+	}
+
+	/**
+	 * 
+	 * @Description: 修改当前登录用户的密码
+	 * @param param
+	 * @param errors
+	 * @return
+	 * @Throws
+	 * @Date 2017年10月11日 下午1:40:52
+	 */
+	@RequestMapping(value = "/pwd", method = RequestMethod.PATCH)
+	@Api
+	public Object modifyUserPassword(@Validated @RequestBody ModifyPasswordParam param, Errors errors) {
 		return null;
 	}
 }

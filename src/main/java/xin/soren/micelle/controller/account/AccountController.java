@@ -55,6 +55,7 @@ public class AccountController {
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	@Api
 	public Object logout() {
+		// 该接口什么都不做, 而且也不能真正的让 token 失效
 		return null;
 	}
 

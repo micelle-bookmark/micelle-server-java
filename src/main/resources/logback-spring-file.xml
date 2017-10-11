@@ -6,8 +6,8 @@
 	-->
 	 
 	<property name="LOGPATH" value="${LOG_PATH:-.}" />
-	<property name="log.moduleName" value="heipa-service" />
-	<property name="applicationName" value="HeipaServiceServer" />
+	<property name="log.moduleName" value="micelle" />
+	<property name="applicationName" value="micelle" />
 	<contextName>${applicationName}</contextName>
 	<timestamp key="configParseTime" datePattern="yyyy-MM-dd HH:mm:ss.SSS" />
 

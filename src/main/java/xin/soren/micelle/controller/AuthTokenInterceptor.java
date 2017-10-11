@@ -31,7 +31,9 @@ public class AuthTokenInterceptor extends HandlerInterceptorAdapter {
 			throw new LessTokenAuthException();
 		}
 
-		String body = AuthTokenHelper.parse(token);
+		AuthSubject authSubject = AuthTokenHelper.parse(token);
+		AuthTokenHelper.setAuthSubject(authSubject);
+
 		return true;
 	}
 }
