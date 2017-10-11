@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import xin.soren.micelle.common.valid.Email;
 
 /**
  * 
@@ -34,7 +35,7 @@ public class AccountParam {
 	public String avatar;
 
 	@NotNull(message = "缺少参数 email", groups = { Register.class })
-	@Length(min = 1, message = "参数 email 长度错误", groups = { Register.class })
+	@Email(message = "参数 email 长度错误", groups = { Register.class })
 	public String email;
 
 	public interface Login extends Default {
