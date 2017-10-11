@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.common.CommonUtils;
 import xin.soren.micelle.common.api.Api;
 import xin.soren.micelle.controller.AuthSubject;
 import xin.soren.micelle.controller.AuthTokenHelper;
 import xin.soren.micelle.controller.user.param.ModifyPasswordParam;
 import xin.soren.micelle.controller.user.param.ModifyUserInfoParam;
+import xin.soren.micelle.exception.InvalidArgsException;
 import xin.soren.micelle.gateway.user.UserApiSerivce;
 
 /**
@@ -68,6 +70,35 @@ public class UserController {
 		AuthSubject subject = AuthTokenHelper.getAuthSubject();
 		log.info("修改当前用户[{}]个人信息, {}", subject.userId, param);
 
+		Long count = 0L;
+		if (param.userName != null) {
+			if (param.userName.trim().length() == 0) {
+				throw new InvalidArgsException("参数 userName 长度错误");
+			}
+
+			count += 1;
+		}
+
+		if (param.email != null) {
+			if (!CommonUtils.isValidEmail(param.email)) {
+				throw new InvalidArgsException("参数 email 格式错误");
+			}
+
+			count += 1;
+		}
+
+		if (param.avatar != null) {
+			if (!CommonUtils.isValidUrl(param.avatar)) {
+				throw new InvalidArgsException("参数 avatar 格式错误");
+			}
+
+			count += 1;
+		}
+
+		if (count.longValue() == 0) {
+			throw new InvalidArgsException("至少需要一个参数");
+		}
+
 		userApiService.modifyUserInfo(subject.userId, param);
 		return null;
 	}
@@ -86,6 +117,9 @@ public class UserController {
 	public Object modifyUserPassword(@Validated @RequestBody ModifyPasswordParam param, Errors errors) {
 		AuthSubject subject = AuthTokenHelper.getAuthSubject();
 		log.info("修改当前用户[{}]密码, {}", subject.userId, param);
+
+		param.newPassword = CommonUtils.base64Decode(param.newPassword);
+		param.oldPassword = CommonUtils.base64Decode(param.oldPassword);
 
 		userApiService.modifyUserPassword(subject.userId, param);
 		return null;

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.common.CommonUtils;
 import xin.soren.micelle.common.api.Api;
 import xin.soren.micelle.controller.account.param.AccountParam;
 import xin.soren.micelle.gateway.user.UserApiSerivce;
@@ -42,6 +43,8 @@ public class AccountController {
 	public Object login(@Validated(AccountParam.Login.class) @RequestBody AccountParam param, Errors errors) {
 		log.info("登录请求, 参数: {}", param);
 
+		param.password = CommonUtils.base64Decode(param.password);
+
 		return null;
 	}
 
@@ -72,6 +75,8 @@ public class AccountController {
 	@Api
 	public Object register(@Validated(AccountParam.Register.class) @RequestBody AccountParam param, Errors errors) {
 		log.info("注册请求, 参数: {}", param);
+
+		param.password = CommonUtils.base64Decode(param.password);
 
 		return null;
 	}

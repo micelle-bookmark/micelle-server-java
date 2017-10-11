@@ -1,13 +1,12 @@
 package xin.soren.micelle.common.valid;
 
-import java.util.regex.Pattern;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.common.CommonUtils;
 
 /**
  * 
@@ -20,9 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UrlValidator implements ConstraintValidator<Url, String> {
 
-	private static final Pattern VALID_URL_ADDRESS_REGEX = Pattern.compile(
-			"^(http://|https://)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.?([a-z]+)?$", Pattern.CASE_INSENSITIVE);
-
 	@Override
 	public void initialize(Url paramA) {
 	}
@@ -33,7 +29,7 @@ public class UrlValidator implements ConstraintValidator<Url, String> {
 			return false;
 		}
 
-		if (!VALID_URL_ADDRESS_REGEX.matcher(paramT).find()) {
+		if (!CommonUtils.isValidUrl(paramT)) {
 			log.info("Validation Fail Email Address: {}", paramT);
 			return false;
 		}

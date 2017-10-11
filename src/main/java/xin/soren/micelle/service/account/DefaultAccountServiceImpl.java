@@ -1,5 +1,7 @@
 package xin.soren.micelle.service.account;
 
+import java.util.Objects;
+
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import xin.soren.micelle.common.CommonUtils;
 import xin.soren.micelle.common.log.WriteLog;
 import xin.soren.micelle.domain.mapper.account.AccountMapper;
 import xin.soren.micelle.domain.model.account.AccountEntity;
+import xin.soren.micelle.exception.WrongPasswordException;
 
 /**
  * 
@@ -69,7 +72,16 @@ public class DefaultAccountServiceImpl implements AccountService {
 
 	@Override
 	@Transactional
-	public Long updateAccountPassword(Long id, String password, String salt) {
-		return accountMapper.updatePassword(id, password, salt);
+	public Long updateAccountPassword(Long id, String password, String oldPwd) {
+		AccountEntity accountEntity = accountMapper.getById(id);
+		assert accountEntity != null;
+
+		String oldEnPwd = CommonUtils.encrypt(oldPwd, accountEntity.getSalt());
+		if (!Objects.equals(oldEnPwd, accountEntity.getPassword())) {
+			throw new WrongPasswordException();
+		}
+
+		Pair<String, String> pwdPair = CommonUtils.encrypt(password);
+		return accountMapper.updatePassword(id, pwdPair.getLeft(), pwdPair.getRight());
 	}
 }

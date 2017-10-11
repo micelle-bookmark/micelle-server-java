@@ -16,7 +16,7 @@ import org.springframework.validation.Errors;
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.CommonUtils;
 import xin.soren.micelle.common.define.Define;
-import xin.soren.micelle.exception.ExceptionCodeConst;
+import xin.soren.micelle.exception.InvalidArgsException;
 import xin.soren.micelle.exception.ServiceException;
 
 /**
@@ -109,6 +109,6 @@ public class ApiAspect {
 			}
 		}
 
-		throw new ServiceException(ExceptionCodeConst.C_API_ARGS_ERROR, errorMessage);
+		throw new InvalidArgsException(errorMessage);
 	}
 }

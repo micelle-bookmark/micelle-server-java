@@ -49,10 +49,10 @@ public interface AccountService {
 	 * @Description: 更新账户密码
 	 * @param id
 	 * @param password
-	 * @param salt
+	 * @param oldPwd
 	 * @return
 	 * @Throws
 	 * @Date 2017年10月11日 下午3:42:46
 	 */
-	public Long updateAccountPassword(Long id, String password, String salt);
+	public Long updateAccountPassword(Long id, String password, String oldPwd);
 }

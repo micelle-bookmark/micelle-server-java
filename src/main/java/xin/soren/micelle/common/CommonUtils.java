@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
@@ -122,9 +123,55 @@ public class CommonUtils {
 		return md5(pwd + salt);
 	}
 
+	/**
+	 * 
+	 * @Description: 加密密码
+	 * @param pwd
+	 * @return
+	 * @Throws
+	 * @Date 2017年10月11日 下午4:42:02
+	 */
 	public static Pair<String, String> encrypt(String pwd) {
 		String salt = UUID.randomUUID().toString();
 		String md5Pwd = encrypt(pwd, salt);
 		return Pair.of(md5Pwd, salt);
+	}
+
+	private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern
+			.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+	/**
+	 * 
+	 * @Description: 是否有效的 Email 地址
+	 * @param email
+	 * @return
+	 * @Throws
+	 * @Date 2017年10月11日 下午4:43:58
+	 */
+	public static boolean isValidEmail(String email) {
+		if (email == null) {
+			return false;
+		}
+
+		return VALID_EMAIL_ADDRESS_REGEX.matcher(email).find();
+	}
+
+	private static final Pattern VALID_URL_ADDRESS_REGEX = Pattern.compile(
+			"^(http://|https://)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.?([a-z]+)?$", Pattern.CASE_INSENSITIVE);
+
+	/**
+	 * 
+	 * @Description: 是否是有效的 URL 地址
+	 * @param url
+	 * @return
+	 * @Throws
+	 * @Date 2017年10月11日 下午4:44:11
+	 */
+	public static boolean isValidUrl(String url) {
+		if (url == null) {
+			return false;
+		}
+
+		return VALID_URL_ADDRESS_REGEX.matcher(url).find();
 	}
 }

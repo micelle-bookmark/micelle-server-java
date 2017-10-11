@@ -32,4 +32,11 @@ public interface UserMapper {
 
 	@Update("update user set user_name=#{userName} where id=#{id}")
 	public Long updateUserName(@Param("id") Long id, @Param("userName") String userName);
+
+	@Update({ "<script>" + "UPDATE user SET " + "<trim prefix=' ' suffix=' ' suffixOverrides=',' >"
+			+ "<if test='#{c.userName} != null'> user_name=#{c.userName}, </if>"
+			+ "<if test='#{c.avatar} != null'> avatar=#{c.avatar}, </if>"
+			+ "<if test='#{c.email} != null'> email=#{c.email}, </if>" + "</trim>" + " WHERE id=#{c.id}"
+			+ "</script>" })
+	public Long updateSelective(@Param("c") UserEntity account);
 }

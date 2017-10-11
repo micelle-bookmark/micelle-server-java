@@ -1,6 +1,7 @@
 package xin.soren.micelle.service.user;
 
 import xin.soren.micelle.controller.account.param.AccountParam;
+import xin.soren.micelle.controller.user.param.ModifyUserInfoParam;
 import xin.soren.micelle.domain.model.user.UserEntity;
 
 /**
@@ -39,4 +40,6 @@ public interface UserService {
 	 * @Date 2017年9月25日 下午9:58:40
 	 */
 	public UserEntity getUserByName(String userName);
+
+	public Long modifyUserInfo(Long userId, ModifyUserInfoParam param);
 }

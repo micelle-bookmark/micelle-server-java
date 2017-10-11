@@ -10,6 +10,18 @@ create table account(
 	primary key(id)
 );
 
+create table user(
+	id bigint not null auto_increment,
+	account_id bigint not null,
+	user_name varchar(64) not null,
+	avatar varchar(512) not null default '',
+	email varchar(64) not null default '',
+	create_time datetime not null default current_timestamp,
+	-- h2 database 不支持 on update
+	modify_time datetime not null default current_timestamp,
+	primary key(id)
+);
+
 -- 模拟 on update
 create trigger ACCOUNT_UPD  after update on account for each row call "xin.soren.micelle.service.account.ModifyTimeTrigger";
 

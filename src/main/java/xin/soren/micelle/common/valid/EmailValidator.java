@@ -1,13 +1,12 @@
 package xin.soren.micelle.common.valid;
 
-import java.util.regex.Pattern;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.common.CommonUtils;
 
 /**
  * 
@@ -19,9 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class EmailValidator implements ConstraintValidator<Email, String> {
-
-	private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern
-			.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
 	@Override
 	public void initialize(Email arg0) {
@@ -36,7 +32,7 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
 			return false;
 		}
 
-		if (!VALID_EMAIL_ADDRESS_REGEX.matcher(arg0).find()) {
+		if (!CommonUtils.isValidEmail(arg0)) {
 			log.info("Validation Fail Email Address: {}", arg0);
 			return false;
 		}
