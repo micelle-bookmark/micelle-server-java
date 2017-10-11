@@ -1,7 +1,6 @@
 package xin.soren.micelle.controller.user;
 
 import javax.annotation.PostConstruct;
-import javax.validation.Valid;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -14,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.api.Api;
 import xin.soren.micelle.controller.user.param.ModifyPasswordParam;
 import xin.soren.micelle.controller.user.param.ModifyUserInfoParam;
-import xin.soren.micelle.controller.user.param.TestParam;
 
 /**
  * 
@@ -41,11 +39,9 @@ public class UserController {
 	 * @Throws
 	 * @Date 2017年9月25日 下午9:20:35
 	 */
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	@Api
-	public Object getUserInfo(@Valid @RequestBody TestParam param, Errors errors) {
-		log.info("登录请求, 参数: {}", param);
-
+	public Object getUserInfo() {
 		return null;
 	}
 
@@ -59,6 +55,8 @@ public class UserController {
 	@RequestMapping(value = "", method = RequestMethod.PATCH)
 	@Api
 	public Object modifyUserInfo(@Validated @RequestBody ModifyUserInfoParam param, Errors errors) {
+		log.info("修改当前用户个人信息, {}", param);
+
 		return null;
 	}
 
@@ -74,6 +72,8 @@ public class UserController {
 	@RequestMapping(value = "/pwd", method = RequestMethod.PATCH)
 	@Api
 	public Object modifyUserPassword(@Validated @RequestBody ModifyPasswordParam param, Errors errors) {
+		log.info("修改当前用户密码, {}", param);
+
 		return null;
 	}
 }

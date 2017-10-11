@@ -38,5 +38,4 @@ public class DefaultUserServiceImpl implements UserService {
 	public UserEntity getUserByName(String userName) {
 		return userMapper.getByUserName(userName);
 	}
-
 }
