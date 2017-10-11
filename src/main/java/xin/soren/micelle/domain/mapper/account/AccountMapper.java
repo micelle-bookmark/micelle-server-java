@@ -34,7 +34,7 @@ public interface AccountMapper {
 			+ "<if test='#{c.modifyTime} != null'> #{c.modifyTime}, </if>" + "</trim>" + "</script>" })
 	public Long insertSelective(@Param("c") AccountEntity account);
 
-	@Select("select * from account " + "where id=#{id}")
+	@Select("select id, account_name, password, salt, create_time, modify_time from account " + "where id=#{id}")
 	@Results(id = "default", value = { @Result(property = "accountName", column = "account_name"),
 			@Result(property = "createTime", column = "create_time"),
 			@Result(property = "modifyTime", column = "modify_time") })

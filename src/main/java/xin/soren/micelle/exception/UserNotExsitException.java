@@ -10,6 +10,10 @@ package xin.soren.micelle.exception;
 @SuppressWarnings("serial")
 public class UserNotExsitException extends ServiceException {
 	public UserNotExsitException() {
-		super(ExceptionCodeConst.S_USER_DOESNOT_EXSIT, "用户不存在");
+		this("用户不存在");
+	}
+
+	public UserNotExsitException(String msg) {
+		super(ExceptionCodeConst.S_USER_DOESNOT_EXSIT, msg);
 	}
 }

@@ -38,4 +38,6 @@ public class ExceptionCodeConst {
 
 	// 用户不存在
 	public static final Long S_USER_DOESNOT_EXSIT = 201001L;
+	// 密码错误
+	public static final Long S_WRONG_PASSWORD = 201002L;
 }

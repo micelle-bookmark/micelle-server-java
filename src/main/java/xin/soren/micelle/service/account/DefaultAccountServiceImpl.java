@@ -66,4 +66,10 @@ public class DefaultAccountServiceImpl implements AccountService {
 
 		return accountId;
 	}
+
+	@Override
+	@Transactional
+	public Long updateAccountPassword(Long id, String password, String salt) {
+		return accountMapper.updatePassword(id, password, salt);
+	}
 }

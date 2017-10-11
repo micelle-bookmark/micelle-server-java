@@ -1,11 +1,19 @@
 package xin.soren.micelle.gateway.user;
 
+import java.util.Objects;
+
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.common.CommonUtils;
+import xin.soren.micelle.controller.user.param.ModifyPasswordParam;
+import xin.soren.micelle.controller.user.param.ModifyUserInfoParam;
+import xin.soren.micelle.domain.model.account.AccountEntity;
 import xin.soren.micelle.domain.model.user.UserEntity;
 import xin.soren.micelle.exception.UserNotExsitException;
+import xin.soren.micelle.exception.WrongPasswordException;
 import xin.soren.micelle.service.account.AccountService;
 import xin.soren.micelle.service.user.UserService;
 
@@ -35,14 +43,42 @@ public class DefaultUserApiSerivceImpl implements UserApiSerivce {
 
 	@Override
 	public User getUserInfo(Long userId) {
-		UserEntity userEntity = userService.getUserById(userId);
-		if (userEntity == null) {
-			log.error("用户不存在, id={}", userId);
-			throw new UserNotExsitException();
-		}
+		UserEntity userEntity = getUserInfoThrow(userId);
 
 		return User.builder().userId(userEntity.getId()).userName(userEntity.getUserName())
 				.avatar(userEntity.getAvatar()).email(userEntity.getEmail()).build();
 	}
 
+	@Override
+	public void modifyUserInfo(Long userId, ModifyUserInfoParam param) {
+		UserEntity userEntity = getUserInfoThrow(userId);
+	}
+
+	@Override
+	public void modifyUserPassword(Long userId, ModifyPasswordParam param) {
+		UserEntity userEntity = getUserInfoThrow(userId);
+
+		Long accountId = userEntity.getAccountId();
+		AccountEntity accountEntity = accountService.getAccountById(accountId);
+		assert accountEntity != null;
+
+		String pwd = CommonUtils.encrypt(param.oldPassword, accountEntity.getSalt());
+		if (!Objects.equals(pwd, accountEntity.getPassword())) {
+			throw new WrongPasswordException();
+		}
+
+		// TODO: 隐藏到 AccountService 中?
+		Pair<String, String> newPwd = CommonUtils.encrypt(param.newPassword);
+
+		accountService.updateAccountPassword(accountId, newPwd.getLeft(), newPwd.getRight());
+	}
+
+	private UserEntity getUserInfoThrow(Long userId) {
+		UserEntity userEntity = userService.getUserById(userId);
+		if (userEntity == null) {
+			throw new UserNotExsitException(String.format("用户[id=%d]不存在", userId));
+		}
+
+		return userEntity;
+	}
 }

@@ -2,6 +2,7 @@ package xin.soren.micelle.controller.user;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,8 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.api.Api;
+import xin.soren.micelle.controller.AuthSubject;
+import xin.soren.micelle.controller.AuthTokenHelper;
 import xin.soren.micelle.controller.user.param.ModifyPasswordParam;
 import xin.soren.micelle.controller.user.param.ModifyUserInfoParam;
+import xin.soren.micelle.gateway.user.UserApiSerivce;
 
 /**
  * 
@@ -25,6 +29,9 @@ import xin.soren.micelle.controller.user.param.ModifyUserInfoParam;
 @RequestMapping("/api/user")
 @Slf4j
 public class UserController {
+
+	@Autowired
+	private UserApiSerivce userApiService;
 
 	@PostConstruct
 	public void init() {
@@ -42,7 +49,10 @@ public class UserController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@Api
 	public Object getUserInfo() {
-		return null;
+		AuthSubject subject = AuthTokenHelper.getAuthSubject();
+		log.info("获取用户[{}] 的基本信息", subject.userId);
+
+		return userApiService.getUserInfo(subject.userId);
 	}
 
 	/**
@@ -55,8 +65,10 @@ public class UserController {
 	@RequestMapping(value = "", method = RequestMethod.PATCH)
 	@Api
 	public Object modifyUserInfo(@Validated @RequestBody ModifyUserInfoParam param, Errors errors) {
-		log.info("修改当前用户个人信息, {}", param);
+		AuthSubject subject = AuthTokenHelper.getAuthSubject();
+		log.info("修改当前用户[{}]个人信息, {}", subject.userId, param);
 
+		userApiService.modifyUserInfo(subject.userId, param);
 		return null;
 	}
 
@@ -72,8 +84,10 @@ public class UserController {
 	@RequestMapping(value = "/pwd", method = RequestMethod.PATCH)
 	@Api
 	public Object modifyUserPassword(@Validated @RequestBody ModifyPasswordParam param, Errors errors) {
-		log.info("修改当前用户密码, {}", param);
+		AuthSubject subject = AuthTokenHelper.getAuthSubject();
+		log.info("修改当前用户[{}]密码, {}", subject.userId, param);
 
+		userApiService.modifyUserPassword(subject.userId, param);
 		return null;
 	}
 }
