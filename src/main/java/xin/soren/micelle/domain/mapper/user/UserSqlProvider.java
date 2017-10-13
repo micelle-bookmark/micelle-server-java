@@ -16,8 +16,6 @@ import xin.soren.micelle.domain.model.user.UserEntity;
 @Slf4j
 public class UserSqlProvider {
 	public static String getByUserId(Long userId) {
-		// Long userId = (Long) params.get("arg0");
-
 		return new SQL() {
 			{
 				SELECT("id, account_id, user_name, avatar, email, create_time, modify_time");
@@ -28,8 +26,6 @@ public class UserSqlProvider {
 	}
 
 	public static String updateSelective(@Param("c") UserEntity userEntity) {
-		log.info(userEntity.toString());
-
 		return new SQL() {
 			{
 				UPDATE("user");

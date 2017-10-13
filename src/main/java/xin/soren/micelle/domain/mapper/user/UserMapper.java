@@ -8,15 +8,28 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 
 import xin.soren.micelle.domain.model.user.UserEntity;
 
 @Mapper
 public interface UserMapper {
-	// @Select("select id, account_id, user_name, avatar, email, create_time,
-	// modify_time " + "from user where id=#{arg0}")
+	// @Options(useGeneratedKeys = true, keyProperty = "id")
+	@Insert("insert into user(id, account_id, user_name, avatar, email, create_time, modify_time) "
+			+ "values(#{user.id}, #{user.accountId}, #{user.userName}, #{user.avatar}, #{user.email}, #{user.createTime}, #{user.modifyTime})")
+	public Long insert(@Param("user") UserEntity user);
+
+	@Insert({ "<script>" + "INSERT INTO user" + "<trim prefix='(' suffix=')' suffixOverrides=',' >"
+			+ "id, account_id, user_name, " + "<if test='#{user.avatar} != null'> avatar, </if>"
+			+ "<if test='#{user.email} != null'> email, </if>"
+			+ "<if test='#{user.createTime} != null'> create_time, </if>"
+			+ "<if test='#{user.modifyTime} != null'> modify_time, </if>" + "</trim>" + " VALUES"
+			+ "<trim prefix='(' suffix=')' suffixOverrides=',' >" + "#{user.id}, #{user.accountId}, #{user.userName}, "
+			+ "<if test='#{user.avatar} != null'> #{user.avatar}, </if>"
+			+ "<if test='#{user.email} != null'> #{user.email}, </if>"
+			+ "<if test='#{user.createTime} != null'> #{user.createTime}, </if>"
+			+ "<if test='#{user.modifyTime} != null'> #{user.modifyTime}, </if>" + "</trim>" + "</script>" })
+	public Long insertSelective(@Param("user") UserEntity account);
 
 	@SelectProvider(type = UserSqlProvider.class, method = "getByUserId")
 	@Results(id = "default", value = { @Result(property = "accountId", column = "account_id"),
@@ -29,14 +42,6 @@ public interface UserMapper {
 			+ "from user where user_name=#{userName}")
 	@ResultMap("default")
 	public UserEntity getByUserName(@Param("userName") String userName);
-
-	// @Options(useGeneratedKeys = true, keyProperty = "id")
-	@Insert("insert into user(id, account_id, user_name, avatar, email) "
-			+ "values(#{user.id}, #{user.accountId}, #{user.userName}, #{user.avatar}, #{user.email})")
-	public Long insert(@Param("user") UserEntity user);
-
-	@Update("update user set user_name=#{userName} where id=#{id}")
-	public Long updateUserName(@Param("id") Long id, @Param("userName") String userName);
 
 	// @Update({ "<script>" + "UPDATE user SET " + "<trim prefix=' ' suffix=' '
 	// suffixOverrides=',' >"

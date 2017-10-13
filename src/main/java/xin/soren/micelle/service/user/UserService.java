@@ -41,5 +41,14 @@ public interface UserService {
 	 */
 	public UserEntity getUserByName(String userName);
 
+	/**
+	 * 
+	 * @Description: 修改用户信息
+	 * @param userId
+	 * @param param
+	 * @return
+	 * @Throws
+	 * @Date 2017年10月13日 下午9:46:10
+	 */
 	public Long modifyUserInfo(Long userId, ModifyUserInfoParam param);
 }

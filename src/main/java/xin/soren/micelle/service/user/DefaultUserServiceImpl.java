@@ -24,7 +24,7 @@ import xin.soren.micelle.service.id.IdService;
 @Slf4j
 public class DefaultUserServiceImpl implements UserService {
 	@Autowired
-	UserMapper userMapper;
+	private UserMapper userMapper;
 
 	@Autowired
 	private IdService idService;
@@ -38,7 +38,6 @@ public class DefaultUserServiceImpl implements UserService {
 		Long id = idService.nextUserId();
 
 		log.info("创建用户[{}], {}", id, param);
-
 		accountService.createAccount(id, param.password);
 
 		UserEntity userEntity = new UserEntity();

@@ -26,29 +26,7 @@ import xin.soren.micelle.exception.WrongPasswordException;
 public class DefaultAccountServiceImpl implements AccountService {
 
 	@Autowired
-	AccountMapper accountMapper;
-
-	@Override
-	@Transactional
-	@WriteLog("'创建帐号, accountId: '+#args[0]+' , name: '+#args[1]")
-	public Long createAccount(Long id, String accountName, String password, String salt) {
-		log.info("创建账户, id={}, accountName={}, password={}, salt={}", id, accountName, password, salt);
-
-		AccountEntity accountEntity = new AccountEntity();
-		accountEntity.setId(id);
-		accountEntity.setAccountName(accountName);
-		accountEntity.setPassword(password);
-		accountEntity.setSalt(salt);
-
-		accountMapper.insertSelective(accountEntity);
-
-		return id;
-	}
-
-	@Override
-	public AccountEntity getAccountById(Long id) {
-		return accountMapper.getById(id);
-	}
+	private AccountMapper accountMapper;
 
 	@Transactional
 	@Override
@@ -61,17 +39,22 @@ public class DefaultAccountServiceImpl implements AccountService {
 		String salt = pwdPair.getRight();
 		String accountName = String.valueOf(accountId);
 
+		log.info("帐号名: {}, 帐号ID: {}", accountName, accountId);
+
 		AccountEntity accountEntity = new AccountEntity();
 		accountEntity.setId(accountId);
 		accountEntity.setAccountName(accountName);
 		accountEntity.setPassword(pwdPair.getLeft());
 		accountEntity.setSalt(salt);
 
+		accountMapper.insertSelective(accountEntity);
+
 		return accountId;
 	}
 
 	@Override
 	@Transactional
+	@WriteLog("'修改帐号['+#args[0]+'密码'")
 	public Long updateAccountPassword(Long id, String password, String oldPwd) {
 		AccountEntity accountEntity = accountMapper.getById(id);
 		assert accountEntity != null;
@@ -83,5 +66,10 @@ public class DefaultAccountServiceImpl implements AccountService {
 
 		Pair<String, String> pwdPair = CommonUtils.encrypt(password);
 		return accountMapper.updatePassword(id, pwdPair.getLeft(), pwdPair.getRight());
+	}
+
+	@Override
+	public AccountEntity getAccountById(Long id) {
+		return accountMapper.getById(id);
 	}
 }
