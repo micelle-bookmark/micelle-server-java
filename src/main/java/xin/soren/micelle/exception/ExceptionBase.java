@@ -1,7 +1,5 @@
 package xin.soren.micelle.exception;
 
-import java.text.MessageFormat;
-
 import org.springframework.http.HttpStatus;
 
 import lombok.AllArgsConstructor;
@@ -28,6 +26,11 @@ public class ExceptionBase extends RuntimeException {
 
 	@Override
 	public String toString() {
-		return MessageFormat.format("[错误码 {0}] {1}", errorCode, errorMsg);
+		return String.format("[错误码 {%d}] {%s}", errorCode, errorMsg);
+	}
+
+	@Override
+	public String getMessage() {
+		return toString();
 	}
 }
