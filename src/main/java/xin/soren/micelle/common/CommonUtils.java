@@ -98,9 +98,8 @@ public class CommonUtils {
 	 */
 	public static String md5(String arg) {
 		byte[] bs = arg.getBytes();
-		MessageDigest digest;
 		try {
-			digest = MessageDigest.getInstance(MD5);
+			MessageDigest digest = MessageDigest.getInstance(MD5);
 			digest.update(bs);
 			return Hex.encodeHexString(digest.digest());
 		} catch (NoSuchAlgorithmException e) {
