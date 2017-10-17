@@ -56,7 +56,6 @@ public class CommonUtils {
 	 * @Description: base64 编码字符串
 	 * @param arg
 	 * @return
-	 * @throws UnsupportedEncodingException
 	 * @Throws
 	 * @Date 2017年10月11日 下午2:15:44
 	 */
@@ -74,7 +73,6 @@ public class CommonUtils {
 	 * @Description: base64 解码字符串
 	 * @param arg
 	 * @return
-	 * @throws UnsupportedEncodingException
 	 * @Throws
 	 * @Date 2017年10月11日 下午2:16:30
 	 */
@@ -92,7 +90,6 @@ public class CommonUtils {
 	 * @Description: 计算字符串的 md5 值
 	 * @param arg
 	 * @return
-	 * @throws NoSuchAlgorithmException
 	 * @Throws
 	 * @Date 2017年10月11日 下午2:19:18
 	 */
@@ -110,11 +107,25 @@ public class CommonUtils {
 
 	/**
 	 * 
+	 * @Description: 获取一个 UUID
+	 * @return
+	 * @Throws
+	 * @Date 2017年10月17日 下午1:53:17
+	 */
+	public static String uuid() {
+		return UUID.randomUUID().toString();
+	}
+
+	public static String uuid2() {
+		return uuid();
+	}
+
+	/**
+	 * 
 	 * @Description: 加密
 	 * @param pwd
 	 * @param salt
 	 * @return
-	 * @throws NoSuchAlgorithmException
 	 * @Throws
 	 * @Date 2017年10月11日 下午2:21:16
 	 */
@@ -131,7 +142,7 @@ public class CommonUtils {
 	 * @Date 2017年10月11日 下午4:42:02
 	 */
 	public static Pair<String, String> encrypt(String pwd) {
-		String salt = UUID.randomUUID().toString();
+		String salt = uuid();
 		String md5Pwd = encrypt(pwd, salt);
 		return Pair.of(md5Pwd, salt);
 	}
