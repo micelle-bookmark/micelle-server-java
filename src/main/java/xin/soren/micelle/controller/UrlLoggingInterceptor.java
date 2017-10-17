@@ -24,7 +24,11 @@ public class UrlLoggingInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		log.info("访问 URL: {}", request.getRequestURL().toString());
+		if (request.getQueryString() != null) {
+			log.info("访问 URL: {}?{}", request.getRequestURL().toString(), request.getQueryString());
+		} else {
+			log.info("访问 URL: {}", request.getRequestURL().toString());
+		}
 
 		String request_batch_number = request.getParameter("request_batch_number");
 		request_batch_number = StringUtils.isBlank(request_batch_number) ? "" : request_batch_number;
