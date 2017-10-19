@@ -131,4 +131,24 @@ public class CommonUtilsTest {
 		Assert.assertEquals(v.getLeft(), destMd5String);
 		Assert.assertEquals(v.getRight(), salt);
 	}
+
+	@Test
+	public void isValidEmailTestOk() {
+
+	}
+
+	@Test
+	public void isValidEmailTestFail() {
+
+	}
+
+	@Test
+	public void isValidUrlTestOk() {
+
+	}
+
+	@Test
+	public void isValidUrlTestFail() {
+
+	}
 }

@@ -116,10 +116,6 @@ public class CommonUtils {
 		return UUID.randomUUID().toString();
 	}
 
-	public static String uuid2() {
-		return uuid();
-	}
-
 	/**
 	 * 
 	 * @Description: 加密
