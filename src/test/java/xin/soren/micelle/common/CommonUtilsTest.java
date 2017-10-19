@@ -1,6 +1,8 @@
 package xin.soren.micelle.common;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.tuple.Pair;
@@ -134,21 +136,128 @@ public class CommonUtilsTest {
 
 	@Test
 	public void isValidEmailTestOk() {
+		/**
+		 * https://blogs.msdn.microsoft.com/testing123/2009/02/06/email-address-test-cases/
+		 */
+		@SuppressWarnings("serial")
+		List<String> emails = new ArrayList<String>() {
+			{
+				add("5@qq.com");
+				add("email@domain.com");
+				add("firstname.lastname@domain.com");
+				add("email@subdomain.domain.com");
+				add("firstname+lastname@domain.com");
+				add("email@123.123.123.123");
+				add("email@[123.123.123.123]");
+				add("\"email\"@domain.com");
+				add("1234567890@domain.com");
+				add("email@domain-one.com");
+				add("_______@domain.com");
+				add("email@domain.name");
+				add("email@domain.co.jp");
+				add("firstname-lastname@domain.com");
+			}
+		};
 
+		for (String email : emails) {
+			Assert.assertTrue(CommonUtils.isValidEmail(email));
+		}
 	}
 
 	@Test
 	public void isValidEmailTestFail() {
+		@SuppressWarnings("serial")
+		List<String> emails = new ArrayList<String>() {
+			{
+				add(null);
+				add("");
+				add("4");
+				add("5@.com");
+				add("@qq.com");
+				add("5@qq.");
+				add("plainaddress");
+				add("#@%^%#$@#$@#.com");
+				add("@domain.com");
+				// add("Joe Smith <email@domain.com>");
+				add("email.domain.com");
+				// add("email@domain@domain.com");
+				// add(".email@domain.com");
+				add("email.@domain.com");
+				// add("email..email@domain.com");
+				add("あいうえお@domain.com");
+				// add("email@domain.com (Joe Smith)");
+				add("email@domain");
+				add("email@-domain.com");
+				// add("email@domain.web");
+				// add("email@111.222.333.44444");
+				add("email@domain..com");
+			}
+		};
 
+		for (String email : emails) {
+			Assert.assertFalse(CommonUtils.isValidEmail(email));
+		}
 	}
 
 	@Test
 	public void isValidUrlTestOk() {
+		/**
+		 * https://daringfireball.net/misc/2010/07/url-matching-regex-test-data.text
+		 */
+		@SuppressWarnings("serial")
+		List<String> urls = new ArrayList<String>() {
+			{
+				add("https://www.tuya.com");
+				add("http://www.tuya.com");
+				add("ftp://www.tuya.com");
+				add("ftp://www.tuya.com.aa");
+				add("ftp://www.tuya.com.aa?");
+				add("http://foo.com/blah_blah");
+				add("http://foo.com/blah_blah/");
+				add("http://foo.com/blah_blah_(wikipedia)");
+				add("http://foo.com/more_(than)_one_(parens)");
+				add("http://foo.com/blah_(wikipedia)#cite-1");
+				add("http://foo.com/blah_(wikipedia)_blah#cite-1");
+				add("http://foo.com/unicode_(✪)_in_parens");
+				add("http://foo.com/(something)?after=parens");
+				add("http://foo.com/blah_blah.");
+				add("http://foo.com/blah_blah/.");
+				add("http://foo.com/blah_blah,");
+				add("http://www.extinguishedscholar.com/wpglob/?p=364.");
+				// add("http://✪df.ws/1234");
+				// add("http://➡.ws/䨹");
+				// add("www.c.ws/䨹");
+				add("http://example.com/something?with,commas,in,url, but not at end");
+				add("http://www.asianewsphoto.com/(S(neugxif4twuizg551ywh3f55))/Web_ENG/View_DetailPhoto.aspx?PicId=752");
+				add("http://www.asianewsphoto.com/(S(neugxif4twuizg551ywh3f55))");
+				add("http://lcweb2.loc.gov/cgi-bin/query/h?pp/horyd:@field(NUMBER+@band(thc+5a46634))");
+			}
+		};
 
+		for (String url : urls) {
+			Assert.assertTrue(CommonUtils.isValidUrl(url));
+		}
 	}
 
 	@Test
 	public void isValidUrlTestFail() {
+		@SuppressWarnings("serial")
+		List<String> urls = new ArrayList<String>() {
+			{
+				add(null);
+				add("");
+				add("6:00p");
+				add("filename.txt");
+				// add("http://example.com/quotes-are-“part”");
+				add("✪df.ws/1234");
+				add("example.com");
+				add("example.com/");
+			}
+		};
 
+		for (String url : urls) {
+			System.out.println(url);
+			Assert.assertFalse(CommonUtils.isValidUrl(url));
+		}
 	}
 }
