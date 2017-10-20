@@ -1,4 +1,4 @@
-package xin.soren.micelle.domain.model.record;
+package xin.soren.micelle.gateway.bookmark;
 
 import java.util.Date;
 
@@ -7,13 +7,13 @@ import xin.soren.micelle.common.define.BookmarkOperateType;
 
 /**
  * 
- * @Description: 数据操作记录 DO
+ * @Description: 书签操作记录
  * @author soren
- * @date 2017年9月29日 下午2:38:48
+ * @date 2017年10月20日 下午9:40:27
  *
  */
 @Data
-public class RecordEntity {
+public class Record {
 	private Long id;
 
 	private Long userId;
@@ -26,5 +26,4 @@ public class RecordEntity {
 	public String category;
 
 	private Date createTime;
-	private Date modifyTime;
 }
