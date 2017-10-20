@@ -1,6 +1,7 @@
 package xin.soren.micelle.gateway.bookmark;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 import xin.soren.micelle.common.define.BookmarkCategory;
@@ -21,4 +22,6 @@ public class Bookmark {
 	public Long parentId;
 	public BookmarkCategory category;
 	public Date createTime;
+
+	public List<Bookmark> children;
 }

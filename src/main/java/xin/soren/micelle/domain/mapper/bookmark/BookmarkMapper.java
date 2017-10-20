@@ -26,7 +26,7 @@ public interface BookmarkMapper {
 
 	@Select("select id, user_id, name, url, parent_id, is_delete, category, create_time, modify_time from bookmark where user_id=#{userId} and is_delete=0")
 	@ResultMap("default")
-	public List<BookmarkEntity> listAll(@Param("userId") Long userId);
+	public List<BookmarkEntity> listAllByUser(@Param("userId") Long userId);
 
 	@Insert("<script>INSERT INTO bookmark(user_id, name, url, parent_id, category, is_delete) " + "VALUES"
 			+ "<foreach item='bookmark' collection='bookmarks' open='' separator=',' close=''>" + "("

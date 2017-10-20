@@ -1,6 +1,14 @@
 package xin.soren.micelle.service.bookmark;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.common.log.WriteLog;
+import xin.soren.micelle.domain.mapper.bookmark.BookmarkMapper;
+import xin.soren.micelle.domain.model.bookmark.BookmarkEntity;
 
 /**
  * 
@@ -10,6 +18,19 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public class DefaultBookmarkServiceImpl {
+@Slf4j
+public class DefaultBookmarkServiceImpl implements BookmarkService {
+
+	@Autowired
+	private BookmarkMapper mapper;
+
+	@WriteLog(value = "'获取用户['+#args[0]+']书签列表'")
+	@Override
+	public List<BookmarkEntity> listUserBookmarks(Long userId) {
+		List<BookmarkEntity> bookmarkEntities = mapper.listAllByUser(userId);
+
+		log.info("获取用户[{}]书签列表, size={}", userId, bookmarkEntities.size());
+		return bookmarkEntities;
+	}
 
 }
