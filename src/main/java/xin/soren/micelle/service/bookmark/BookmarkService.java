@@ -21,4 +21,14 @@ public interface BookmarkService {
 	 * @Date 2017年10月20日 下午9:44:07
 	 */
 	List<BookmarkEntity> listUserBookmarks(Long userId);
+
+	/**
+	 * 
+	 * @Description: 获取书签目录下的子书签
+	 * @param bookmarkId
+	 * @return
+	 * @Throws
+	 * @Date 2017年10月20日 下午9:54:13
+	 */
+	List<BookmarkEntity> listChildren(Long bookmarkId);
 }
