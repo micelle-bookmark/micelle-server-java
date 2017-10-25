@@ -6,7 +6,7 @@
 	<groupId>xin.soren</groupId>
 	<artifactId>micelle</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
 	<name>MicelleServer</name>
 	<description>HeiPa App SpringBoot Server.</description>
@@ -211,4 +211,4 @@
 	</build>
 
 
-</project>
+	<modules></modules></project>
