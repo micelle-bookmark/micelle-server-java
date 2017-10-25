@@ -26,6 +26,7 @@
 
 	<modules>
 		<module>micelle-api</module>
+		<module>micelle-user</module>
 	</modules>
 
 	<dependencies>
