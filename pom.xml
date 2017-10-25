@@ -9,7 +9,7 @@
 	<packaging>pom</packaging>
 
 	<name>MicelleServer</name>
-	<description>HeiPa App SpringBoot Server.</description>
+	<description>Micelle App SpringBoot Server.</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

@@ -9,9 +9,8 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<groupId>xin.soren.user</groupId>
+	<groupId>xin.soren.micelle.user</groupId>
 	<artifactId>micelle-user</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>micelle-user</name>
 	<url>http://maven.apache.org</url>
 	
