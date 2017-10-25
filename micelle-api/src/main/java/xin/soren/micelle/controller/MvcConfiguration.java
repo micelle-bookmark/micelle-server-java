@@ -29,7 +29,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		registry.addInterceptor(urlLoggingInterceptor());
 
 		registry.addInterceptor(authTokenInterceptor()).excludePathPatterns("/api/login")
-				.excludePathPatterns("/api/register");
+				.excludePathPatterns("/api/register").excludePathPatterns("/");
 	}
 
 	@Bean
