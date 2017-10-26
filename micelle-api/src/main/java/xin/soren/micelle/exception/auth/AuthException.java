@@ -2,8 +2,7 @@ package xin.soren.micelle.exception.auth;
 
 import java.text.MessageFormat;
 
-import org.springframework.http.HttpStatus;
-
+import xin.soren.micelle.exception.Const;
 import xin.soren.micelle.exception.ExceptionBase;
 
 /**
@@ -21,7 +20,7 @@ public class AuthException extends ExceptionBase {
 	private static final long serialVersionUID = 1L;
 
 	public AuthException(long code, String msg) {
-		super(code, msg, HttpStatus.FORBIDDEN);
+		super(code, msg, Const.StatusCode.FORBIDDEN);
 	}
 
 	@Override

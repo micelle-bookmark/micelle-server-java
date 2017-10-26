@@ -41,7 +41,7 @@ public class ExceptionHandlerAdvice {
 	public Object handleExceptionBase(ExceptionBase exceptionBase, HttpServletResponse rsp) {
 		log.error("内部错误, {}", ExceptionUtils.getStackTrace(exceptionBase));
 
-		rsp.setStatus(exceptionBase.getStatusCode().value());
+		rsp.setStatus(exceptionBase.getStatusCode());
 		return new ApiResponseError(exceptionBase.getErrorCode(), exceptionBase.getErrorMsg());
 	}
 
