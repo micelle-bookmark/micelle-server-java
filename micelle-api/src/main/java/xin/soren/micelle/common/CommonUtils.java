@@ -18,7 +18,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import xin.soren.micelle.exception.EncryptException;
+import xin.soren.micelle.common.exception.EncryptException;
 
 /**
  * 

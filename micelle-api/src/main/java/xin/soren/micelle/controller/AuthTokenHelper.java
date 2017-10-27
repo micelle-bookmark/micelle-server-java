@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.define.Define;
-import xin.soren.micelle.exception.auth.InvalidAuthException;
+import xin.soren.micelle.common.exception.auth.InvalidAuthException;
 import xin.soren.micelle.service.auth.AuthService;
 
 /**

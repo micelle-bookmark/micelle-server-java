@@ -1,4 +1,4 @@
-package xin.soren.micelle.exception;
+package xin.soren.micelle.common.exception;
 
 /**
  * 

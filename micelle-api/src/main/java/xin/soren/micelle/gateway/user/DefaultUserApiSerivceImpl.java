@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.common.exception.UserNotExsitException;
 import xin.soren.micelle.controller.user.param.ModifyPasswordParam;
 import xin.soren.micelle.controller.user.param.ModifyUserInfoParam;
 import xin.soren.micelle.domain.model.user.UserEntity;
-import xin.soren.micelle.exception.UserNotExsitException;
 import xin.soren.micelle.service.account.AccountService;
 import xin.soren.micelle.service.user.UserService;
 

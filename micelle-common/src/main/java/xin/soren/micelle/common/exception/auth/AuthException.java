@@ -1,9 +1,9 @@
-package xin.soren.micelle.exception.auth;
+package xin.soren.micelle.common.exception.auth;
 
 import java.text.MessageFormat;
 
-import xin.soren.micelle.exception.Const;
-import xin.soren.micelle.exception.ExceptionBase;
+import xin.soren.micelle.common.exception.Const;
+import xin.soren.micelle.common.exception.ExceptionBase;
 
 /**
  * 

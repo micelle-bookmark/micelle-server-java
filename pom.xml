@@ -25,9 +25,9 @@
 	</properties>
 
 	<modules>
+		<module>micelle-common</module>
 		<module>micelle-api</module>
 		<module>micelle-user</module>
-		<module>micelle-common</module>
 	</modules>
 
 	<dependencies>
@@ -133,29 +133,5 @@
 		</dependency>
 
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.projectlombok</groupId>
-				<artifactId>lombok-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>

@@ -1,4 +1,4 @@
-package xin.soren.micelle.exception;
+package xin.soren.micelle.common.exception;
 
 /**
  * 
@@ -24,6 +24,9 @@ public class Const {
 		 */
 		static public int OK = 200;
 
+		/**
+		 * 无权限
+		 */
 		static public int FORBIDDEN = 403;
 	}
 }

@@ -1,6 +1,6 @@
-package xin.soren.micelle.exception.auth;
+package xin.soren.micelle.common.exception.auth;
 
-import xin.soren.micelle.exception.ExceptionCodeConst;
+import xin.soren.micelle.common.exception.ExceptionCodeConst;
 
 /**
  * 

@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.CommonUtils;
 import xin.soren.micelle.common.api.Api;
+import xin.soren.micelle.common.exception.InvalidArgsException;
 import xin.soren.micelle.controller.AuthSubject;
 import xin.soren.micelle.controller.AuthTokenHelper;
 import xin.soren.micelle.controller.user.param.ModifyPasswordParam;
 import xin.soren.micelle.controller.user.param.ModifyUserInfoParam;
-import xin.soren.micelle.exception.InvalidArgsException;
 import xin.soren.micelle.gateway.user.UserApiSerivce;
 
 /**

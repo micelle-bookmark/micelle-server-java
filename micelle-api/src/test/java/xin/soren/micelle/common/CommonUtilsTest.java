@@ -19,8 +19,8 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import xin.soren.micelle.exception.EncryptException;
-import xin.soren.micelle.exception.ExceptionCodeConst;
+import xin.soren.micelle.common.exception.EncryptException;
+import xin.soren.micelle.common.exception.ExceptionCodeConst;
 
 @RunWith(PowerMockRunner.class)
 public class CommonUtilsTest {

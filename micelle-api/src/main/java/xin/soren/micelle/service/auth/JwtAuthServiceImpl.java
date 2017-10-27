@@ -21,9 +21,9 @@ import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import xin.soren.micelle.exception.auth.InternalAuthException;
-import xin.soren.micelle.exception.auth.InvalidAuthException;
-import xin.soren.micelle.exception.auth.TimeoutAuthException;
+import xin.soren.micelle.common.exception.auth.InternalAuthException;
+import xin.soren.micelle.common.exception.auth.InvalidAuthException;
+import xin.soren.micelle.common.exception.auth.TimeoutAuthException;
 
 /**
  * 

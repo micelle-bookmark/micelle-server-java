@@ -11,7 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
-import xin.soren.micelle.exception.DatabaseException;
+import xin.soren.micelle.common.exception.DatabaseException;
 
 /**
  * 
