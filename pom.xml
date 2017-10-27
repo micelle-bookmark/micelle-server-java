@@ -29,6 +29,7 @@
 		<module>micelle-api</module>
 		<module>micelle-user</module>
 		<module>micelle-id</module>
+		<module>micelle-bookmark</module>
 	</modules>
 
 	<dependencies>

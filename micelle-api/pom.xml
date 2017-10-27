@@ -25,6 +25,11 @@
 			<artifactId>micelle-user</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>xin.soren</groupId>
+			<artifactId>micelle-bookmark</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
 		<!-- spring mvc -->
