@@ -28,6 +28,7 @@
 		<module>micelle-common</module>
 		<module>micelle-api</module>
 		<module>micelle-user</module>
+		<module>micelle-id</module>
 	</modules>
 
 	<dependencies>

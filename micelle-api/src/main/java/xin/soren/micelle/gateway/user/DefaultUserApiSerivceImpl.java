@@ -47,7 +47,7 @@ public class DefaultUserApiSerivceImpl implements UserApiSerivce {
 
 	@Override
 	public void modifyUserInfo(Long userId, ModifyUserInfoParam param) {
-		Long count = userService.modifyUserInfo(userId, param);
+		Long count = userService.modifyUserInfo(userId, param.userName, param.email, param.avatar);
 		if (Objects.equals(count, 1L)) {
 			throw new UserNotExsitException(String.format("用户[id=%d]不存在", userId));
 		}

@@ -1,7 +1,5 @@
 package xin.soren.micelle.service.user;
 
-import xin.soren.micelle.controller.account.param.AccountParam;
-import xin.soren.micelle.controller.user.param.ModifyUserInfoParam;
 import xin.soren.micelle.domain.model.user.UserEntity;
 
 /**
@@ -19,7 +17,7 @@ public interface UserService {
 	 * @param userName
 	 * @return
 	 */
-	public Long createUser(AccountParam param);
+	public Long createUser(String userName, String password, String email, String avatar);
 
 	/**
 	 * 
@@ -50,5 +48,5 @@ public interface UserService {
 	 * @Throws
 	 * @Date 2017年10月13日 下午9:46:10
 	 */
-	public Long modifyUserInfo(Long userId, ModifyUserInfoParam param);
+	public Long modifyUserInfo(Long userId, String userName, String email, String avatar);
 }

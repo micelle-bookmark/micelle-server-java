@@ -6,11 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.log.WriteLog;
-import xin.soren.micelle.controller.account.param.AccountParam;
-import xin.soren.micelle.controller.user.param.ModifyUserInfoParam;
 import xin.soren.micelle.domain.mapper.user.UserMapper;
 import xin.soren.micelle.domain.model.user.UserEntity;
-import xin.soren.micelle.service.account.AccountService;
 import xin.soren.micelle.service.id.IdService;
 
 /**
@@ -30,22 +27,22 @@ public class DefaultUserServiceImpl implements UserService {
 	private IdService idService;
 
 	@Autowired
-	private AccountService accountService;
+	private xin.soren.micelle.service.account.AccountService accountService;
 
 	@Override
 	@Transactional
-	public Long createUser(AccountParam param) {
+	public Long createUser(String userName, String password, String email, String avatar) {
 		Long id = idService.nextUserId();
 
-		log.info("创建用户[{}], {}", id, param);
-		accountService.createAccount(id, param.password);
+		log.info("创建用户[{}], userName={}, password={}, email={}, avatar={}", id, userName, password, email, avatar);
+		accountService.createAccount(id, password);
 
 		UserEntity userEntity = new UserEntity();
 		userEntity.setId(id);
 		userEntity.setAccountId(id);
-		userEntity.setUserName(param.userName);
-		userEntity.setAvatar(param.avatar);
-		userEntity.setEmail(param.email);
+		userEntity.setUserName(userName);
+		userEntity.setAvatar(avatar);
+		userEntity.setEmail(email);
 		userMapper.insert(userEntity);
 
 		return id;
@@ -64,18 +61,18 @@ public class DefaultUserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	@WriteLog("'修改用户['+#args[0]+']信息: '+#args[1]")
-	public Long modifyUserInfo(Long userId, ModifyUserInfoParam param) {
+	public Long modifyUserInfo(Long userId, String userName, String email, String avatar) {
 		UserEntity userEntity = new UserEntity();
 		userEntity.setId(userId);
 
-		if (param.userName != null) {
-			userEntity.setUserName(param.userName);
+		if (userName != null) {
+			userEntity.setUserName(userName);
 		}
-		if (param.email != null) {
-			userEntity.setEmail(param.email);
+		if (email != null) {
+			userEntity.setEmail(email);
 		}
-		if (param.avatar != null) {
-			userEntity.setAvatar(param.avatar);
+		if (avatar != null) {
+			userEntity.setAvatar(avatar);
 		}
 
 		return userMapper.updateSelective(userEntity);

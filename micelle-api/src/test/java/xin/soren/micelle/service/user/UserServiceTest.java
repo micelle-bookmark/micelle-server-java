@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.controller.user.param.ModifyUserInfoParam;
 import xin.soren.micelle.domain.mapper.user.UserMapper;
 import xin.soren.micelle.domain.model.user.UserEntity;
+import xin.soren.micelle.service.user.UserService;
 
 @RunWith(SpringRunner.class)
 // @SpringBootTest(classes = { DataSourceAutoConfiguration.class,
@@ -27,21 +28,6 @@ public class UserServiceTest {
 
 	@Autowired
 	UserMapper mapper;
-
-	// @Autowired
-	// RedisList<Long> redisList;
-
-	// @Test
-	// public void testInsertUser() {
-	// log.info("-------------------- testInsertUser");
-	// userService.insertUser(1L, "testUserName");
-	// log.info("-------------------- testInsertUser end");
-	// }
-
-	// @Test
-	// public void selectUser() {
-	//
-	// }
 
 	@Test
 	public void updateUser() {
@@ -60,12 +46,12 @@ public class UserServiceTest {
 		param.userName = "userName2";
 		param.avatar = "avatar2";
 		param.email = "email2";
-		Long count = userService.modifyUserInfo(1L, param);
-		Assert.assertEquals(count, (Long) 1L);
+		// Long count = userService.modifyUserInfo(1L, param);
+		// Assert.assertEquals(count, (Long) 1L);
 
-		user = mapper.getByUserId(1L);
-		Assert.assertEquals(param.userName, user.getUserName());
-		Assert.assertEquals(param.avatar, user.getAvatar());
-		Assert.assertEquals(param.email, user.getEmail());
+		// user = mapper.getByUserId(1L);
+		// Assert.assertEquals(param.userName, user.getUserName());
+		// Assert.assertEquals(param.avatar, user.getAvatar());
+		// Assert.assertEquals(param.email, user.getEmail());
 	}
 }
