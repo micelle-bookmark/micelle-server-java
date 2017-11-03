@@ -30,5 +30,34 @@ public interface BookmarkService {
 	 * @Throws
 	 * @Date 2017年10月20日 下午9:54:13
 	 */
-	List<BookmarkEntity> listChildren(Long bookmarkId);
+	List<BookmarkEntity> listChildren(Long userId, Long bookmarkId);
+
+	/**
+	 * 
+	 * @Description: 获取用户顶层的书签列表
+	 * @return
+	 * @Throws
+	 * @date 2017年11月3日 下午9:12:06
+	 */
+	List<BookmarkEntity> listChildren(Long userId);
+
+	/**
+	 * 
+	 * @Description: 删除书签
+	 * @param bookmarkId
+	 * @return
+	 * @Throws
+	 * @date 2017年11月3日 下午9:20:39
+	 */
+	Long deleteById(Long bookmarkId);
+
+	/**
+	 * 
+	 * @Description: 通过 ID 获取书签信息
+	 * @param bookmarkId
+	 * @return
+	 * @Throws
+	 * @date 2017年11月3日 下午9:20:51
+	 */
+	BookmarkEntity getById(Long bookmarkId);
 }

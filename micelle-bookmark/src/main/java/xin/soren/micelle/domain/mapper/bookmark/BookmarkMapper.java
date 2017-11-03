@@ -24,9 +24,15 @@ public interface BookmarkMapper {
 			@Result(property = "modifyTime", column = "modify_time") })
 	public BookmarkEntity getById(@Param("id") Long id);
 
-	@Select("select id, user_id, name, url, parent_id, is_delete, category, create_time, modify_time from bookmark where user_id=#{userId} and is_delete=0")
+	@Select("select id, user_id, name, url, parent_id, is_delete, category, create_time, modify_time from bookmark "
+			+ "where user_id=#{userId} and is_delete=0")
 	@ResultMap("default")
 	public List<BookmarkEntity> listAllByUser(@Param("userId") Long userId);
+
+	@Select("select id, user_id, name, url, parent_id, is_delete, category, create_time, modify_time from bookmark "
+			+ "where user_id=#{userId} and parent_id=#{parentId} and is_delete=0")
+	@ResultMap("default")
+	public List<BookmarkEntity> listChildren(@Param("userId") Long userId, @Param("parentId") Long parenId);
 
 	@Insert("<script>INSERT INTO bookmark(user_id, name, url, parent_id, category, is_delete) " + "VALUES"
 			+ "<foreach item='bookmark' collection='bookmarks' open='' separator=',' close=''>" + "("

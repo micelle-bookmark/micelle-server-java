@@ -1,6 +1,5 @@
 package xin.soren.micelle.service.bookmark;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +33,28 @@ public class DefaultBookmarkServiceImpl implements BookmarkService {
 		return bookmarkEntities;
 	}
 
-	@SuppressWarnings("serial")
-	@WriteLog(value = "'获取书签目录['+#args[0]+']的子书签列表, size='+#retVal.size()")
+	@WriteLog(value = "'获取用户['+#args[0]+']书签目录['+#args[1]+']的子书签列表, size='+#retVal.size()")
 	@Override
-	public List<BookmarkEntity> listChildren(Long bookmarkId) {
+	public List<BookmarkEntity> listChildren(Long userId, Long bookmarkId) {
+		return mapper.listChildren(userId, bookmarkId);
+	}
+
+	@WriteLog(value = "'获取用户['+#args[0]+']顶层书签列表'")
+	@Override
+	public List<BookmarkEntity> listChildren(Long userId) {
+		return listChildren(userId, 0L);
+	}
+
+	@WriteLog(value = "'删除书签['+#args[0]+']'")
+	@Override
+	public Long deleteById(Long bookmarkId) {
 		// TODO Auto-generated method stub
-		return new ArrayList<BookmarkEntity>() {
-			{
-			}
-		};
+		return null;
+	}
+
+	@Override
+	public BookmarkEntity getById(Long bookmarkId) {
+		return mapper.getById(bookmarkId);
 	}
 
 }

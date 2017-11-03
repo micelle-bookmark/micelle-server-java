@@ -38,7 +38,7 @@ public class BookmarkEntity {
 	public String url;
 
 	/**
-	 * 父书签目录 ID
+	 * 父书签目录 ID, 当为 0 时代表没有父书签目录
 	 */
 	public Long parentId;
 
