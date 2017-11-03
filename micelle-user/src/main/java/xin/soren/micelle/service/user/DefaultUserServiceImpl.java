@@ -60,7 +60,7 @@ public class DefaultUserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	@WriteLog("'修改用户['+#args[0]+']信息: '+#args[1]")
+	@WriteLog("'修改用户['+#args[0]+']信息: userName='+#args[1]+', email='+#args[2]+', avatar='+#args[3]")
 	public Long modifyUserInfo(Long userId, String userName, String email, String avatar) {
 		UserEntity userEntity = new UserEntity();
 		userEntity.setId(userId);
