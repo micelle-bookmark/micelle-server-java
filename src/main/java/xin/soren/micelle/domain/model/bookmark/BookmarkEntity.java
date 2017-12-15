@@ -8,7 +8,7 @@ import xin.soren.micelle.common.define.DeleteStatus;
 
 /**
  * 
- * @Description: 书签记录实体
+ * @Description: 书签记录实体， 修改实现方式, 不保存直接的书签结果, 只保存操作记录日志
  * @author Comsys-soren
  * @date 2017年9月12日 上午11:30:26
  * 

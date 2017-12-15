@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>MicelleServer</name>
-	<description>HeiPa App SpringBoot Server.</description>
+	<description>Micelle App SpringBoot Server.</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -135,21 +135,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- aop -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-		</dependency>
-		<!-- aop -->
-
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
@@ -163,6 +148,13 @@
 			<version>0.8.0</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
+ 		<dependency>
+ 		    <groupId>com.google.protobuf</groupId>
+ 		    <artifactId>protobuf-java</artifactId>
+ 		    <version>3.4.0</version>
+ 		</dependency>
+ 
 		<!-- test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
