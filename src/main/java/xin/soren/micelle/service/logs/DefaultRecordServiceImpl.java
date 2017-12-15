@@ -1,4 +1,4 @@
-package xin.soren.micelle.service.record;
+package xin.soren.micelle.service.logs;
 
 import org.springframework.stereotype.Service;
 

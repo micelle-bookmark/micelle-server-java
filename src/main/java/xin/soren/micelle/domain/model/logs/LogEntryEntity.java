@@ -1,4 +1,4 @@
-package xin.soren.micelle.domain.model.record;
+package xin.soren.micelle.domain.model.logs;
 
 import java.util.Date;
 
@@ -7,13 +7,13 @@ import xin.soren.micelle.common.define.BookmarkOperateType;
 
 /**
  * 
- * @Description: 数据操作记录 DO
+ * @Description: 数据操作记录 DO, 仿造 raft 协议命名为 LogEntry
  * @author soren
  * @date 2017年9月29日 下午2:38:48
  *
  */
 @Data
-public class RecordEntity {
+public class LogEntryEntity {
 	private Long id;
 
 	private Long userId;

@@ -1,4 +1,4 @@
-package xin.soren.micelle.domain.mapper.record;
+package xin.soren.micelle.domain.mapper.logs;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,6 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
  *
  */
 @Mapper
-public interface RecordMapper {
+public interface LogEntryMapper {
 
 }
