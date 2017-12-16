@@ -1,6 +1,8 @@
 package xin.soren.micelle.service.id;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.PostConstruct;
@@ -12,14 +14,14 @@ import xin.soren.micelle.common.log.WriteLog;
 
 /**
  * 
- * @Description: ID 生成服务实现类, 该实现类可能会产生重复的 ID
+ * @Description: UUID ID 生成服务实现类, 该实现类可能会产生重复的 ID
  * @author soren
  * @date 2017年9月24日 下午7:51:01
  *
  */
-@Service
+@Service("UUIDId")
 @Slf4j
-public class DefaultIdServiceImpl implements IdService {
+public class UUIDIdServiceImpl implements IdService {
 
 	private static final Long TIMESTAMP_MASK = 0x000001FFFFFFFFFFL;
 	private static final Long TIMESTAMP_SHIFT_NUM = 22L;
@@ -38,22 +40,28 @@ public class DefaultIdServiceImpl implements IdService {
 	}
 
 	@Override
-	@WriteLog(value = "'生成用户ID: '+#retVal")
-
+	@WriteLog(value = "'生成UserId: '+#retVal")
 	public Long nextUserId() {
 		return generateId();
 	}
 
 	@Override
-	@WriteLog(value = "'生成书签ID: '+#retVal")
-	public Long nextBookmarkId() {
+	@WriteLog(value = "'生成 LogsId: '+#retVal")
+	public Long nextLogsId() {
 		return generateId();
 	}
 
+	@SuppressWarnings("serial")
 	@Override
-	@WriteLog(value = "'生成 RecordID: '+#retVal")
-	public Long nextRecordId() {
-		return generateId();
+	@WriteLog(value = "'生成 LogsId: '+#retVal")
+	public List<Long> nextLogsId(int count) {
+		return new ArrayList<Long>() {
+			{
+				for (int i = 0; i < count; ++i) {
+					add(nextLogsId());
+				}
+			}
+		};
 	}
 
 	private Long generateId() {
@@ -63,8 +71,8 @@ public class DefaultIdServiceImpl implements IdService {
 
 	private Long generateId(Long timestamp, Long sequence) {
 		Long id = (((System.currentTimeMillis() - timeDatum)
-				& DefaultIdServiceImpl.TIMESTAMP_MASK) << DefaultIdServiceImpl.TIMESTAMP_SHIFT_NUM)
-				| (sequence & DefaultIdServiceImpl.UUID_MASK);
+				& UUIDIdServiceImpl.TIMESTAMP_MASK) << UUIDIdServiceImpl.TIMESTAMP_SHIFT_NUM)
+				| (sequence & UUIDIdServiceImpl.UUID_MASK);
 		return id;
 	}
 
