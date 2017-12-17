@@ -25,13 +25,13 @@ public class LogEntryEntity {
 	// 操作目标ID, 如果为新增书签则服务端分配
 	private Long bookmarkId;
 	// 书签名称
-	public String name;
+	private String name;
 	// 书签URL
-	public String url;
+	private String url;
 	// 父目录ID, 没有则为 0
-	public Long parentId;
+	private Long parentId;
 	// 书签分类
-	public String category;
+	private String category;
 
 	private Date createTime;
 	private Date modifyTime;

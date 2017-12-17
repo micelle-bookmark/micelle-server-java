@@ -24,7 +24,7 @@ public class AccountEntity {
 	private String accountName;
 
 	/**
-	 * 密码, md5(用户密码+salt)
+	 * 密码, md5(用户密码+salt), 可以使用 bcrypt 来避免业务关注 salt 值
 	 */
 	private String password;
 

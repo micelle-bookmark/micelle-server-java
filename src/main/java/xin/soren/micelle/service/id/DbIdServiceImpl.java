@@ -2,10 +2,12 @@ package xin.soren.micelle.service.id;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.log.WriteLog;
+import xin.soren.micelle.domain.mapper.id.BizIdMapper;
 
 /**
  * 
@@ -16,6 +18,9 @@ import xin.soren.micelle.common.log.WriteLog;
 @Service("DbId")
 @Slf4j
 public class DbIdServiceImpl implements IdService {
+
+	@Autowired
+	private BizIdMapper mapper;
 
 	@Override
 	@WriteLog(value = "'生成UserId: '+#retVal")
