@@ -43,13 +43,6 @@ public interface UserMapper {
 	@ResultMap("default")
 	public UserEntity getByUserName(@Param("userName") String userName);
 
-	// @Update({ "<script>" + "UPDATE user SET " + "<trim prefix=' ' suffix=' '
-	// suffixOverrides=',' >"
-	// + "<if test='#{c.userName} != null'> user_name=#{c.userName}, </if>"
-	// + "<if test='#{c.avatar} != null'> avatar=#{c.avatar}, </if>"
-	// + "<if test='#{c.email} != null'> email=#{c.email}, </if>" + "</trim>" +
-	// " WHERE id=#{c.id}"
-	// + "</script>" })
 	@UpdateProvider(type = UserSqlProvider.class, method = "updateSelective")
 	public Long updateSelective(@Param("c") UserEntity account);
 }

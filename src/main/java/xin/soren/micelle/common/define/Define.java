@@ -21,4 +21,11 @@ public class Define {
 	 * token 字段的前缀
 	 */
 	static public final String TOKEN_HEADER_VALUE_PREFIX = "Bearer ";
+
+	/**
+	 * ID的业务名称
+	 */
+	static public final String BIZ_TAG_USER_ID = "user.id";
+	static public final String BIZ_TAG_ACCOUND_ID = "account.id";
+	static public final String BIZ_TAG_LOG_ID = "log.id";
 }

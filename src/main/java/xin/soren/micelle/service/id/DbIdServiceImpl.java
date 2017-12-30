@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.soren.micelle.common.define.Define;
 import xin.soren.micelle.common.log.WriteLog;
 import xin.soren.micelle.domain.mapper.id.BizIdMapper;
+import xin.soren.micelle.domain.model.id.BizIdEntity;
 
 /**
  * 
@@ -25,8 +27,13 @@ public class DbIdServiceImpl implements IdService {
 	@Override
 	@WriteLog(value = "'生成UserId: '+#retVal")
 	public Long nextUserId() {
-		// TODO Auto-generated method stub
-		return null;
+		BizIdEntity bizIdEntity = mapper.getByBizTag(Define.BIZ_TAG_USER_ID);
+		if (null == bizIdEntity) {
+
+		}
+
+		log.info("生成下一个 UserId, 当前 [{}]", bizIdEntity);
+		return mapper.nextId(Define.BIZ_TAG_USER_ID, bizIdEntity.getMaxId());
 	}
 
 	@Override
