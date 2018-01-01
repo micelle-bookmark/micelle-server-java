@@ -1,6 +1,7 @@
 package xin.soren.micelle.service.id;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 
@@ -30,12 +31,12 @@ public interface IdService {
 
 	/**
 	 * 
-	 * @Description: 获取 n 个可用的 Logs ID
+	 * @Description: 获取 count 个可用的 Logs ID
 	 * @param count:
 	 *            数量
 	 * @return
 	 * @Throws
 	 * @date 2017年12月16日 下午8:39:05
 	 */
-	public List<Long> nextLogsId(int count);
+	public Optional<List<Long>> nextLogsId(int count);
 }

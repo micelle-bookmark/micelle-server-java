@@ -3,6 +3,7 @@ package xin.soren.micelle.service.id;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.annotation.PostConstruct;
@@ -54,14 +55,14 @@ public class UUIDIdServiceImpl implements IdService {
 	@SuppressWarnings("serial")
 	@Override
 	@WriteLog(value = "'生成 LogsId: '+#retVal")
-	public List<Long> nextLogsId(int count) {
-		return new ArrayList<Long>() {
+	public Optional<List<Long>> nextLogsId(int count) {
+		return Optional.of(new ArrayList<Long>() {
 			{
 				for (int i = 0; i < count; ++i) {
 					add(nextLogsId());
 				}
 			}
-		};
+		});
 	}
 
 	private Long generateId() {

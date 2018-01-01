@@ -30,8 +30,8 @@ public class ExceptionCodeConst {
 	// 内部认证错误
 	public static final Long C_AUTH_INTERVAL_ERROR = 100103L;
 
-	// 数据库错误
-	public static final Long S_DATABASE_ERROR = 200000L;
+	// 服务器内部错误
+	public static final Long S_INTERAL_ERROR = 200000L;
 
 	// 加解密错误
 	public static final Long S_ENCRYPT_ERROR = 200100L;
@@ -40,4 +40,6 @@ public class ExceptionCodeConst {
 	public static final Long S_USER_DOESNOT_EXSIT = 201001L;
 	// 密码错误
 	public static final Long S_WRONG_PASSWORD = 201002L;
+	// 数据库错误
+	public static final Long S_DATABASE_ERROR = 200003L;
 }
