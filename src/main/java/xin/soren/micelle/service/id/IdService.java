@@ -18,7 +18,16 @@ public interface IdService {
 	 * @Throws
 	 * @Date 2017年9月24日 下午7:51:56
 	 */
-	public Long nextUserId();
+	public Optional<Long> nextUserId();
+
+	/**
+	 * 
+	 * @Description: 获取下一个可用的账户ID
+	 * @return
+	 * @Throws
+	 * @date 2018年1月2日 上午10:33:46
+	 */
+	public Optional<Long> nextAccountId();
 
 	/**
 	 * 
@@ -27,7 +36,7 @@ public interface IdService {
 	 * @Throws
 	 * @Date 2017年10月9日 下午6:12:30
 	 */
-	public Long nextLogsId();
+	public Optional<Long> nextLogsId();
 
 	/**
 	 * 

@@ -1,5 +1,7 @@
 package xin.soren.micelle.service.user;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,8 @@ import xin.soren.micelle.controller.account.param.AccountParam;
 import xin.soren.micelle.controller.user.param.ModifyUserInfoParam;
 import xin.soren.micelle.domain.mapper.user.UserMapper;
 import xin.soren.micelle.domain.model.user.UserEntity;
+import xin.soren.micelle.exception.ExceptionCodeConst;
+import xin.soren.micelle.exception.ServiceException;
 import xin.soren.micelle.service.account.AccountService;
 import xin.soren.micelle.service.id.IdService;
 
@@ -37,7 +41,13 @@ public class DefaultUserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public Long createUser(AccountParam param) {
-		Long id = idService.nextUserId();
+		Optional<Long> optionalId = idService.nextUserId();
+		Long id = null;
+
+		if (optionalId == null || !optionalId.isPresent()) {
+			log.info("生成用户ID失败");
+			throw new ServiceException(ExceptionCodeConst.S_INTERAL_ERROR, "生成用户ID失败");
+		}
 
 		log.info("创建用户[{}], {}", id, param);
 		accountService.createAccount(id, param.password);

@@ -31,7 +31,7 @@ public class DbIdServiceImpl implements IdService {
 
 	@Override
 	@WriteLog(value = "'生成UserId: '+#retVal")
-	public Long nextUserId() {
+	public Optional<Long> nextUserId() {
 		BizIdEntity bizIdEntity = mapper.getByBizTag(Define.BIZ_TAG_USER_ID);
 		if (null == bizIdEntity) {
 			throw new ServiceException(ExceptionCodeConst.S_INTERAL_ERROR,
@@ -41,15 +41,33 @@ public class DbIdServiceImpl implements IdService {
 		log.info("生成下一个 UserId, 当前 [{}]", bizIdEntity);
 		Long updateCount = mapper.nextId(Define.BIZ_TAG_USER_ID, bizIdEntity.getMaxId());
 		if (updateCount == null || updateCount.equals(0L)) {
-			return null;
+			return Optional.empty();
 		}
 
-		return bizIdEntity.getMaxId();
+		return Optional.of(bizIdEntity.getMaxId());
+	}
+
+	@Override
+	@WriteLog(value = "'生成 AccountID: '+#retVal")
+	public Optional<Long> nextAccountId() {
+		BizIdEntity bizIdEntity = mapper.getByBizTag(Define.BIZ_TAG_ACCOUND_ID);
+		if (null == bizIdEntity) {
+			throw new ServiceException(ExceptionCodeConst.S_INTERAL_ERROR,
+					MessageFormat.format("生成用户ID时 {0} 记录不存在 ", Define.BIZ_TAG_ACCOUND_ID));
+		}
+
+		log.info("生成下一个 UserId, 当前 [{}]", bizIdEntity);
+		Long updateCount = mapper.nextId(Define.BIZ_TAG_ACCOUND_ID, bizIdEntity.getMaxId());
+		if (updateCount == null || updateCount.equals(0L)) {
+			return Optional.empty();
+		}
+
+		return Optional.of(bizIdEntity.getMaxId());
 	}
 
 	@Override
 	@WriteLog(value = "'生成 LogsId: '+#retVal")
-	public Long nextLogsId() {
+	public Optional<Long> nextLogsId() {
 		BizIdEntity bizIdEntity = mapper.getByBizTag(Define.BIZ_TAG_LOG_ID);
 		if (null == bizIdEntity) {
 			throw new ServiceException(ExceptionCodeConst.S_INTERAL_ERROR,
@@ -59,10 +77,10 @@ public class DbIdServiceImpl implements IdService {
 		log.info("生成下一个 LogsId, 当前 [{}]", bizIdEntity);
 		Long updateCount = mapper.nextId(Define.BIZ_TAG_LOG_ID, bizIdEntity.getMaxId());
 		if (updateCount == null || updateCount.equals(0L)) {
-			return null;
+			return Optional.empty();
 		}
 
-		return bizIdEntity.getMaxId();
+		return Optional.of(bizIdEntity.getMaxId());
 	}
 
 	@SuppressWarnings("serial")

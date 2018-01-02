@@ -44,4 +44,10 @@ public class IndexController {
 	public Object apiIndex() {
 		return app;
 	}
+
+	@RequestMapping(value = "/api/version", method = RequestMethod.GET)
+	@Api
+	public Object apiVersion() {
+		return app;
+	}
 }

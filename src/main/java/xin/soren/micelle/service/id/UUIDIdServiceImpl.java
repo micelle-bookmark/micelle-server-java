@@ -42,14 +42,20 @@ public class UUIDIdServiceImpl implements IdService {
 
 	@Override
 	@WriteLog(value = "'生成UserId: '+#retVal")
-	public Long nextUserId() {
-		return generateId();
+	public Optional<Long> nextUserId() {
+		return Optional.of(generateId());
+	}
+
+	@Override
+	@WriteLog(value = "'生成 AccountId: '+#retVal")
+	public Optional<Long> nextAccountId() {
+		return Optional.of(generateId());
 	}
 
 	@Override
 	@WriteLog(value = "'生成 LogsId: '+#retVal")
-	public Long nextLogsId() {
-		return generateId();
+	public Optional<Long> nextLogsId() {
+		return Optional.of(generateId());
 	}
 
 	@SuppressWarnings("serial")
@@ -59,7 +65,7 @@ public class UUIDIdServiceImpl implements IdService {
 		return Optional.of(new ArrayList<Long>() {
 			{
 				for (int i = 0; i < count; ++i) {
-					add(nextLogsId());
+					add(generateId());
 				}
 			}
 		});
@@ -76,5 +82,4 @@ public class UUIDIdServiceImpl implements IdService {
 				| (sequence & UUIDIdServiceImpl.UUID_MASK);
 		return id;
 	}
-
 }
