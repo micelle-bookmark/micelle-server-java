@@ -28,4 +28,5 @@ public class Define {
 	static public final String BIZ_TAG_USER_ID = "user.id";
 	static public final String BIZ_TAG_ACCOUND_ID = "account.id";
 	static public final String BIZ_TAG_LOG_ID = "log.id";
+	static public final String BIZ_TAG_BOOKMARK_ID = "bookmark.id";
 }

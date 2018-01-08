@@ -38,10 +38,10 @@ public class DefaultUserApiSerivceImpl implements UserApiSerivce {
 	}
 
 	@Override
-	public User getUserInfo(Long userId) {
+	public UserBO getUserInfo(Long userId) {
 		UserEntity userEntity = getUserInfoThrow(userId);
 
-		return User.builder().userId(userEntity.getId()).userName(userEntity.getUserName())
+		return UserBO.builder().userId(userEntity.getId()).userName(userEntity.getUserName())
 				.avatar(userEntity.getAvatar()).email(userEntity.getEmail()).build();
 	}
 

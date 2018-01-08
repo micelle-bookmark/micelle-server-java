@@ -38,9 +38,8 @@ public class DefaultLogEntryServiceImpl implements LogEntryService {
 	}
 
 	@Override
-	public boolean saveLogEntrys(Long userId, List<LogEntryEntity> entrys) {
-		// TODO Auto-generated method stub
-		return false;
+	public Long saveLogEntrys(Long userId, List<LogEntryEntity> entrys) {
+		return mapper.insertLogEntrys(entrys);
 	}
 
 }

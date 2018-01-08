@@ -33,5 +33,5 @@ public interface LogEntryService {
 	 * @Throws
 	 * @date 2018年1月8日 上午11:04:19
 	 */
-	public boolean saveLogEntrys(Long userId, List<LogEntryEntity> entrys);
+	public Long saveLogEntrys(Long userId, List<LogEntryEntity> entrys);
 }

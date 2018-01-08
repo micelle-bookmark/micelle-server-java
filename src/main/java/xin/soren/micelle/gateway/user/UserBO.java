@@ -12,9 +12,9 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class User {
-	public Long userId;
-	public String userName;
-	public String avatar;
-	public String email;
+public class UserBO {
+	private Long userId;
+	private String userName;
+	private String avatar;
+	private String email;
 }

@@ -27,6 +27,9 @@ public class LogEntryReportParam {
 		@NotNull(message = "缺少参数操作类型 op")
 		private BookmarkOperateType op;
 
+		@NotNull(message = "缺少参数 bookmarkId")
+		private Long bookmarkId;
+
 		@NotNull(message = "缺少参数书签名称 name")
 		@Length(min = 1, message = "参数 name 长度错误")
 		private String name;

@@ -108,4 +108,22 @@ public class DbIdServiceImpl implements IdService {
 		});
 	}
 
+	@Override
+	@WriteLog(value = "'生成 BookmarkId: '+#retVal")
+	public Optional<Long> nextBookmarkId() {
+		BizIdEntity bizIdEntity = mapper.getByBizTag(Define.BIZ_TAG_BOOKMARK_ID);
+		if (null == bizIdEntity) {
+			throw new ServiceException(ExceptionCodeConst.S_INTERAL_ERROR,
+					MessageFormat.format("生成书签ID时 {0} 记录不存在 ", Define.BIZ_TAG_BOOKMARK_ID));
+		}
+
+		log.info("生成下一个 书签Id, 当前 [{}]", bizIdEntity);
+		Long updateCount = mapper.nextId(Define.BIZ_TAG_BOOKMARK_ID, bizIdEntity.getMaxId());
+		if (updateCount == null || updateCount.equals(0L)) {
+			return Optional.empty();
+		}
+
+		return Optional.of(bizIdEntity.getMaxId());
+	}
+
 }

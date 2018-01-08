@@ -48,4 +48,13 @@ public interface IdService {
 	 * @date 2017年12月16日 下午8:39:05
 	 */
 	public Optional<List<Long>> nextLogsId(int count);
+
+	/**
+	 * 
+	 * @Description: 获取下一个可用的书签 ID
+	 * @return
+	 * @Throws
+	 * @date 2018年1月8日 下午4:15:17
+	 */
+	public Optional<Long> nextBookmarkId();
 }

@@ -1,5 +1,8 @@
 package xin.soren.micelle.controller.logs;
 
+import javax.validation.Valid;
+
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.api.Api;
 import xin.soren.micelle.controller.AuthSubject;
 import xin.soren.micelle.controller.AuthTokenHelper;
+import xin.soren.micelle.controller.logs.param.LogEntryReportParam;
 
 /**
  * 
@@ -46,7 +50,10 @@ public class LogEntryController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	@Api
-	public Object postLogsEntry() {
+	public Object postLogsEntry(@Valid @RequestBody LogEntryReportParam param) {
+		AuthSubject subject = AuthTokenHelper.getAuthSubject();
+		log.info("用户[{}] 的追加日志信息, 参数: [{}]", subject.userId, param);
+
 		return null;
 	}
 }

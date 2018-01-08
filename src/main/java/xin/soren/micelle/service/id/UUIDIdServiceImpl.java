@@ -53,6 +53,12 @@ public class UUIDIdServiceImpl implements IdService {
 	}
 
 	@Override
+	@WriteLog(value = "'生成 BookmarkId: '+#retVal")
+	public Optional<Long> nextBookmarkId() {
+		return Optional.of(generateId());
+	}
+
+	@Override
 	@WriteLog(value = "'生成 LogsId: '+#retVal")
 	public Optional<Long> nextLogsId() {
 		return Optional.of(generateId());

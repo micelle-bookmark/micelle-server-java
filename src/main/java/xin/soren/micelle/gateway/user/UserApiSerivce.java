@@ -30,7 +30,7 @@ public interface UserApiSerivce {
 	 * @Throws
 	 * @Date 2017年10月11日 下午2:47:47
 	 */
-	public User getUserInfo(Long userId);
+	public UserBO getUserInfo(Long userId);
 
 	/**
 	 * 
