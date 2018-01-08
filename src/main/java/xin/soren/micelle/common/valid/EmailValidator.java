@@ -27,8 +27,11 @@ public class EmailValidator implements ConstraintValidator<Email, String> {
 	 * validation 的过程中会捕获抛出的异常, 然后抛出 javax.validation.ValidationException
 	 */
 	@Override
-	public boolean isValid(String arg0, ConstraintValidatorContext arg1) {
+	public boolean isValid(String arg0, ConstraintValidatorContext constraintValidatorContext) {
 		if (arg0 == null || arg0.isEmpty()) {
+			// 覆盖默认的 message
+			constraintValidatorContext.disableDefaultConstraintViolation();
+			constraintValidatorContext.buildConstraintViolationWithTemplate("").addConstraintViolation();
 			return false;
 		}
 

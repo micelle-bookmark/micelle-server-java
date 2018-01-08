@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.handler.annotation.support.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -61,5 +62,14 @@ public class ExceptionHandlerAdvice {
 		log.error("数据库错误, {}", ExceptionUtils.getStackTrace(exception));
 
 		return new ApiResponseError(ExceptionCodeConst.S_DATABASE_ERROR, "数据库错误");
+	}
+
+	@ExceptionHandler(value = MethodArgumentNotValidException.class)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public Object handleMethodArgsValidationException(MethodArgumentNotValidException exception) {
+		log.error("参数 validation 错误, {}", ExceptionUtils.getStackTrace(exception));
+
+		return new ApiResponseError(ExceptionCodeConst.C_API_ARGS_ERROR, "参数错误");
 	}
 }
