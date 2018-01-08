@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.api.Api;
+import xin.soren.micelle.controller.AuthSubject;
+import xin.soren.micelle.controller.AuthTokenHelper;
 
 /**
  * 
@@ -29,7 +31,9 @@ public class LogEntryController {
 	@RequestMapping(method = RequestMethod.GET)
 	@Api
 	public Object getLogsEntry(@RequestParam(value = "lastid", required = false, defaultValue = "0") Long lastLogsId) {
-		log.info("");
+		AuthSubject subject = AuthTokenHelper.getAuthSubject();
+		log.info("用户[{}] 的获取日志信息, 最后日志编号: [{}]", subject.userId, lastLogsId);
+
 		return null;
 	}
 
