@@ -69,4 +69,10 @@ public class DefaultUserApiSerivceImpl implements UserApiSerivce {
 
 		return userEntity;
 	}
+
+	@Override
+	public int login() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
 }

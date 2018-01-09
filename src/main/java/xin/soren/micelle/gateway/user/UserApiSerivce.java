@@ -51,4 +51,12 @@ public interface UserApiSerivce {
 	 * @Date 2017年10月11日 下午3:30:18
 	 */
 	public void modifyUserPassword(Long userId, ModifyPasswordParam param);
+
+	/**
+	 * 
+	 * @Description: 用户登陆
+	 * @Throws
+	 * @date 2018年1月9日 下午2:44:55
+	 */
+	public int login();
 }

@@ -45,7 +45,7 @@ public class AccountController {
 
 		param.password = CommonUtils.base64Decode(param.password);
 
-		return null;
+		return userApiService.login();
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class AccountController {
 	@Api
 	public Object logout() {
 		// 该接口什么都不做, 而且也不能真正的让 token 失效
-		return null;
+		return userApiService.login();
 	}
 
 	/**
