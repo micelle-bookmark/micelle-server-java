@@ -20,21 +20,6 @@ public class AccountServiceTest {
 	@Autowired
 	AccountMapper mapper;
 
-	// @Test
-	// public void testInsertAccount() {
-	// log.info("test insert account");
-	//
-	// AccountEntity accountEntity = new AccountEntity();
-	// accountEntity.setId(1L);
-	// accountEntity.setAccountName("accountName");
-	// accountEntity.setPassword("password");
-	// accountEntity.setSalt("salt");
-	// accountEntity.setCreateTime(new Date());
-	// accountEntity.setModifyTime(new Date());
-	// Long count = mapper.insert(accountEntity);
-	// Assert.assertEquals(count, (Long) 1L);
-	// }
-
 	@Test
 	public void testUpdate() {
 		log.info("test update account");

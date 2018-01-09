@@ -1,6 +1,8 @@
 package xin.soren.micelle.common;
 
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,19 +94,23 @@ public class CommonUtilsTest {
 		Assert.assertEquals(v, destMd5String);
 	}
 
-	// @SuppressWarnings("unchecked")
-	// @Test
-	// @PrepareForTest(CommonUtils.class)
-	// public void md5TestFail() throws NoSuchAlgorithmException {
-	// PowerMockito.mockStatic(MessageDigest.class);
-	// // mockStatic
-	// PowerMockito.when(MessageDigest.getInstance("MD5")).thenThrow(NoSuchAlgorithmException.class);
-	//
-	// thrown.expect(EncryptException.class);
-	//
-	// CommonUtils.md5(srcMd5String);
-	// Assert.fail();
-	// }
+	@SuppressWarnings("unchecked")
+	@Test
+	@PrepareForTest(CommonUtils.class)
+	public void md5TestFail() throws NoSuchAlgorithmException {
+		PowerMockito.mockStatic(MessageDigest.class);
+		// mockStatic
+		// PowerMockito.when(MessageDigest.getInstance(Mockito.any(String.class)))
+		// .thenThrow(NoSuchAlgorithmException.class);
+
+		// PowerMockito.when(MessageDigest.getInstance(Mockito.anyString())).thenThrow(NoSuchAlgorithmException.class);
+		PowerMockito.when(MessageDigest.getInstance(Mockito.eq("md5"))).thenThrow(NoSuchAlgorithmException.class);
+
+		thrown.expect(EncryptException.class);
+
+		CommonUtils.md5(srcMd5String);
+		Assert.fail();
+	}
 
 	@Test
 	public void encryptTestOk() {
