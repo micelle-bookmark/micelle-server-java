@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import xin.soren.micelle.controller.AuthTokenInterceptor;
 import xin.soren.micelle.gateway.user.UserApiSerivce;
+import xin.soren.micelle.gateway.user.UserLoginBO;
 
 @RunWith(SpringRunner.class)
 // @WebMvcTest(value = AccountController.class)
@@ -48,7 +49,7 @@ public class AccountControllerTest {
 
 	@Test
 	public void testLogoutSuccess() throws Exception {
-		given(userApiSerivce.login()).willReturn(2);
+		given(userApiSerivce.login(Mockito.any(), Mockito.any())).willReturn(new UserLoginBO());
 		given(authTokenInterceptor.preHandle(Mockito.any(), Mockito.any(), Mockito.any())).willReturn(true);
 
 		mockMvc.perform(post("/api/logout").contentType(MediaType.APPLICATION_JSON_UTF8)).andDo(print())

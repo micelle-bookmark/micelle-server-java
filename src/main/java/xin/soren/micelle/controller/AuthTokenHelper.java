@@ -69,7 +69,7 @@ public class AuthTokenHelper {
 	 * @Throws
 	 * @Date 2017年10月11日 下午1:31:30
 	 */
-	static public AuthSubject parse(String token) throws JsonParseException, JsonMappingException, IOException {
+	static public AuthSubject parse(String token) {
 		assert token != null;
 
 		if (!token.startsWith(Define.TOKEN_HEADER_VALUE_PREFIX)) {
@@ -77,7 +77,7 @@ public class AuthTokenHelper {
 		}
 
 		String subject = AuthTokenHelper.authService.parse(token.replace(Define.TOKEN_HEADER_VALUE_PREFIX, ""));
-		return mapper.readValue(subject, AuthSubject.class);
+		return AuthSubject.Helper.from(subject);
 	}
 
 	/**

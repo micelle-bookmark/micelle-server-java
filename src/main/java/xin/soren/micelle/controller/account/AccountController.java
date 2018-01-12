@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 import xin.soren.micelle.common.CommonUtils;
 import xin.soren.micelle.common.api.Api;
+import xin.soren.micelle.controller.AuthSubject;
+import xin.soren.micelle.controller.AuthTokenHelper;
 import xin.soren.micelle.controller.account.param.AccountParam;
 import xin.soren.micelle.gateway.user.UserApiSerivce;
 
@@ -44,8 +46,7 @@ public class AccountController {
 		log.info("登录请求, 参数: {}", param);
 
 		param.password = CommonUtils.base64Decode(param.password);
-
-		return userApiService.login();
+		return userApiService.login(param.userName, param.password);
 	}
 
 	/**
@@ -58,8 +59,11 @@ public class AccountController {
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	@Api
 	public Object logout() {
+		AuthSubject subject = AuthTokenHelper.getAuthSubject();
+		log.info("当前用户[{}]退出登陆", subject.userId);
+
 		// 该接口什么都不做, 而且也不能真正的让 token 失效
-		return userApiService.login();
+		return userApiService.logout(subject.userId);
 	}
 
 	/**

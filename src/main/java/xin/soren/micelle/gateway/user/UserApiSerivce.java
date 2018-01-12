@@ -58,5 +58,15 @@ public interface UserApiSerivce {
 	 * @Throws
 	 * @date 2018年1月9日 下午2:44:55
 	 */
-	public int login();
+	public UserLoginBO login(String userName, String password);
+
+	/**
+	 * 
+	 * @Description: 用户退出登陆
+	 * @param userId
+	 * @return
+	 * @Throws
+	 * @date 2018年1月12日 下午1:55:43
+	 */
+	public boolean logout(Long userId);
 }
